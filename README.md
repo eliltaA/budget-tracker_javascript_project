@@ -19,7 +19,9 @@ The budget tracker will use the following technologies and libraries:
 -Backend: No backend is used for this project as data will be stored in cookies.
 
 Implementation Timeline:
--Friday Afternoon & Weekend: Implement the core HTML structure and CSS styles for the frontend.
+
+-Friday Afternoon & Weekend: Plan and finalize project structure, including wireframes and basic HTML/CSS layout.
+Set up GitHub repository and initial project files. Implement the core HTML structure and CSS styles for the frontend.
 
 -Monday: Develop the expense tracking functionality, allowing users to add, edit, and delete expenses.
 
