@@ -27,9 +27,7 @@ Implementation Timeline:
 
 -Wednesday: Finalize data visualization with interactive charts and graphs.Test the application for responsiveness and make necessary adjustments.
 
--Thursday Morning: Perform comprehensive testing and debugging.   Polish the user interface and add any finishing touches.
-
-Link to live version of the project provided.
+-Thursday Morning: Perform comprehensive testing and debugging. Polish the user interface and add any finishing touches.
 
 Wireframes:
 https://www.figma.com/proto/UCIlKgc3ECNvGolZtJMHBf/Untitled?type=design&node-id=1-2&t=tK1JfkUUE3dS3den-1&scaling=scale-down&page-id=0%3A1&mode=design
