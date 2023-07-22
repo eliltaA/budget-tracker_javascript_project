@@ -4,12 +4,129 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="dist/main.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script> -->
+    <script src="dist/main.js" defer></script>
     <link rel="stylesheet" href="dist/main.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <title>Budget Tracker</title>
 </head>
 <body>
-    <div class="js-container"></div>
+    
+    <div class="js-container">
+        <h1>Budget Tracker</h1>
+        <div class="header">
+            <div class="header-headings">
+              <button class="add-btn " id="incomeBtn">Income</button>
+              <button class="add-btn" id="expenseBtn">Expenses</button>
+              <button class="add-btn" id="budgetBtn">Budget</button>
+              <button class="add-btn active-tab" id="summaryBtn">Summary</button>
+            </div>
+        </div>
+            <div class="element-container">
+            <div class="income-container">
+            <div class="info">
+            <div class="info-add-new">
+            <div class="income-info-add">
+
+            <h2>Add New Income</h2>
+                <form action="" id="incomeAddForm">
+                    <div class = "forms">
+                        <label for="">Income:</label>
+                        <input 
+                            type="number"
+                            id="newIncomeInput"
+                            placeholder="Enter your income"
+                        >
+                    </div>
+                    <div class="forms">
+                        <label for="">Existing Source:</label>
+                        <select name="" id="existingIncomeSource">
+                          <option value="salary">Salary</option>
+                          <!-- <option value="youtube">Youtube</option> -->
+                        </select>
+                    </div>
+                    <p>OR</p>
+                    <div class="forms"> 
+                        <label for="">New Source:</label>
+                        <input
+                            type="text"
+                            id="newIncomeSource"
+                            placeholder="Add New Source"
+                        >
+                    </div>
+                    <div class="forms">
+                        <input type="submit" value="submit">
+                    </div>
+                </form>
+                </div>
+
+                </div>
+            </div>
+            <div class="detail">
+              <div class="detail-category">
+                <!-- income chart -->
+                <div class="income-details">
+                  <div class="totalincome-value">
+                    <table>
+                      <tbody id="incomeChartTableBody">
+                        <tr>
+                          <th>Total Income:</th>
+                          <th><p id="incomeValue"></p></th>
+                        </tr>
+                      </tbody>
+                    </table>
+                   </div>
+                  <!-- <canvas id="incomeChart"></canvas> -->
+                </div> 
+                <!-- income chart -->
+              </div>
+              
+              <!-- expense container -->
+              <!-- <div class="expense-container">
+                <div class="info">
+                    <div class="info-add-new">
+                        <div class="income-info-add">
+                            <h3>Add new transaction</h3>
+                            <form action="" id="expenseAddForm">
+                                <div class="expense-from-inputs">
+                                    <div class="forms">
+                                        <label for="">Expense:</label>
+                                        <input 
+                                            type="number"
+                                            id="newExpenseInput"
+                                            placeholder="Enter amount"
+                                        >
+                                    </div>
+                                    <div class="forms">
+                                        <label for="">Tag:</label>
+                                        <select name="" id="existingExpenseInput"></select>
+                                    </div>
+                                </div>
+                                <div class="forms"> 
+                                    <input type="submit" value="submit">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+              </div>
+              <div class="info-summary"></div>
+              <div class="all-expenses-div">
+                <h3>Latest Transactions</h3>
+                <div class="all-expenses">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Tag</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody id="allExpensesBody"></tbody>
+                  </table>
+                </div>
+              </div> -->
+
 </body>
 </html>
