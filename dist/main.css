@@ -25,8 +25,8 @@ p {
 }
 
 .container {
-  margin: 24px;
-  padding: 24px;
+  margin: 10px;
+  padding: 10px;
 }
 
 .hidden {
@@ -52,15 +52,30 @@ p {
 }
 
 .info {
-  margin-top: 3rem;
-  margin-left: 2rem;
+  margin-top: 2rem;
+  margin-left: 3rem;
   display: flex;
   /* justify-content: space-around; */
 }
 
-.info-add-new,
-.info-summary {
+.income-container {
   display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* Container for the income form and table */
+.income-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.info-add-new,
+.income-details,
+.chart-container {
+  display: flex;
+  flex: 1;
   height: 20rem;
   width: 30rem;
   background-color: var(--white);
@@ -68,17 +83,30 @@ p {
   padding: 2rem;
 }
 
-.detail {
+.chart-container {
+  display: flex;
+  justify-content: space-between;
   margin-top: 2rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  gap: 30px;
+}
+
+#incomeBarChart {
+  margin-left: 3rem;
+}
+
+.income-details {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
   display: flex;
   justify-content: space-around;
 }
 
-.detail-category,
+.income-details,
 .detail-recents {
   display: flex;
-  /* height: 20rem;
-  width: 30rem; */
   background-color: var(--white);
   border-radius: 20px;
   padding: 1rem;
@@ -162,13 +190,6 @@ select {
 
 .budget-table td {
   text-align: center;
-}
-
-#incomeChart {
-  height: 480px !important;
-  width: 480px !important;
-  background-color: var(--white);
-  margin-bottom: 3rem !important;
 }
 
 #incBudCompareChart {
