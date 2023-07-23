@@ -85,21 +85,32 @@ p {
 
 .chart-container {
   display: flex;
-  justify-content: space-between;
   margin-top: 2rem;
   margin-left: 3rem;
   margin-right: 3rem;
+  margin-bottom: 3rem;
   gap: 30px;
 }
 
+#incomeChart {
+  height: 400px; /* Adjust the height as needed */
+  width: 400px; /* Adjust the width as needed */
+  background-color: var(--white);
+  border-radius: 20px;
+}
+
 #incomeBarChart {
-  margin-left: 3rem;
+  height: 400px; /* Adjust the height as needed */
+  width: 400px; /* Adjust the width as needed */
+  background-color: var(--white);
+  border-radius: 20px;
 }
 
 .income-details {
   margin-top: 2rem;
   margin-left: 2rem;
   margin-right: 2rem;
+  overflow: auto;
   display: flex;
   justify-content: space-around;
 }
@@ -107,6 +118,8 @@ p {
 .income-details,
 .detail-recents {
   display: flex;
+  height: 20rem;
+  width: 30rem;
   background-color: var(--white);
   border-radius: 20px;
   padding: 1rem;
@@ -164,7 +177,7 @@ input[type=number],
 select {
   min-height: 20px;
   padding: 5px;
-  border: 1px solid var(--torquoise);
+  border: 2px solid var(--torquoise);
   border-radius: 6px;
   outline: none;
 }
