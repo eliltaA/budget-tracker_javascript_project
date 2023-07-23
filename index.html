@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script> -->
     <script src="dist/main.js" defer></script>
+    <!-- <script src="node_modules/chart.js/dist/chart.min.js"></script> -->
     <link rel="stylesheet" href="dist/main.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <title>Budget Tracker</title>
@@ -68,19 +68,32 @@
                 <div class="income-details">
                   <div class="totalincome-value">
                     <table>
+                        <thead>
+                          <tr>
+                            <th>Source</th>
+                            <th>Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody id="incomeTableBody">
+                          <!-- Table rows will be generated dynamically -->
+                        </tbody>
+                      </table>
+                    <!-- <table>
                       <tbody id="incomeChartTableBody">
                         <tr>
                           <th>Total Income:</th>
                           <th><p id="incomeValue"></p></th>
                         </tr>
                       </tbody>
-                    </table>
+                    </table> -->
                    </div>
-                  <!-- <canvas id="incomeChart"></canvas> -->
                 </div> 
                 <!-- income chart -->
               </div>
-              
+              <!-- <div class="chart-container"> -->
+              <canvas id="incomeChart" width="400" height="400"></canvas>
+              <canvas id="incomeBarChart" width="400" height="200"></canvas>
+            </div>
               <!-- expense container -->
               <!-- <div class="expense-container">
                 <div class="info">
