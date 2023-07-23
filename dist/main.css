@@ -46,9 +46,10 @@
   }
   
   .info {
-    margin-top: 2rem;
+    margin-top: 3rem;
+    margin-left: 2rem;
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
   }
   .info-add-new,
   .info-summary {
@@ -57,7 +58,7 @@
     width: 30rem;
     background-color: var(--white);
     border-radius: 20px;
-    padding: 1rem;
+    padding: 2rem;
   }
   
   .detail {
@@ -77,7 +78,7 @@
   }
   
   .add-btn,
-  .formGroup input[type='submit'] {
+  .forms input[type='submit'] {
     background-color: var(--torquoise);
     border: none;
     height: 35px;
@@ -87,7 +88,7 @@
     cursor: pointer;
   }
   .add-btn:hover,
-  .formGroup input[type='submit']:hover {
+  .forms input[type='submit']:hover {
     background-color: darkcyan;
   }
   
@@ -115,7 +116,7 @@
     flex-direction: column;
     padding: 10px;
   }
-  .formGroup {
+  .forms {
     padding: 10px 0 10px 0;
   }
   input[type='text'],
