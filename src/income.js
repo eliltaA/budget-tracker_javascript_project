@@ -7,13 +7,16 @@ class Income {
         this.budget = "";
         this.savings = this.income - this.budget;
         this.incomeCategories = this.getIncomeCategories();
-        this.budgetCategories = "";
+        this.budgetCategories = this.getBudgetCategories();
         this.incomeAddForm = document.getElementById("incomeAddForm")
         this.incomeAddForm.addEventListener("submit", this.addIncomeForm.bind(this))
         this.loadFromCookies();
         this.incomeData = []; // Initialize incomeData as an empty array
         this.incomeLabels = [];
         this.generateIncomeTable();
+        // document.getElementById("budgetBtn").addEventListener("click", () => {
+        //     window.location.href = "budget.html";
+        //   });
     }
 
      setCookie(name, value, daysToExpire) {
@@ -195,8 +198,26 @@ class Income {
             },
         });
     }
+
+    getBudgetCategories() {
+        const budgetCategories = this.getCookie("budgetCategories");
+        return budgetCategories ? JSON.parse(budgetCategories) : [];
+      }
+    
+
+    // initPageSwitching() {
+    //     const pages = document.querySelectorAll('.page');
+    //     const buttons = document.querySelectorAll('.header-headings button');
+
+    //     buttons.forEach((button, index) => {
+    //         button.addEventListener('click', () => {
+    //             pages.forEach((page) => page.classList.remove('active-page'));
+    //             pages[index].classList.add('active-page');
+    //         });
+    //     });
+    // }
 }
 
 const incomeObj = new Income()
-
+// incomeObj.initPageSwitching();
 export default incomeObj;
