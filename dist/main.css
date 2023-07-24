@@ -27,10 +27,6 @@ p {
   padding: 24px;
 }
 
-.hidden {
-  display: none;
-}
-
 .header {
   display: flex;
 }
@@ -280,4 +276,8 @@ select {
 
 .summary-saving span {
   font-weight: 700;
+}
+
+.hidden {
+  display: none;
 }
