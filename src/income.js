@@ -4,8 +4,7 @@ class Income {
     constructor(){
         this.income = 0;
         this.incomes = [];
-        this.budget = "";
-        this.savings = this.income - this.budget;
+        this.budget = 0;
         this.incomeCategories = this.getIncomeCategories();
         this.budgetCategories = [];
         this.budgetAddBtn = document.getElementById("budgetAddbtn")
@@ -17,6 +16,7 @@ class Income {
         this.generateIncomeTable();
         this.loadBudgetCategoriesFromCookies();
         this.updateBudgetTotal();
+        this.updateSavings();
         this.generateBudgetTable();
     }
 
@@ -69,6 +69,7 @@ class Income {
       // Method to update the savings property based on income and budget
     updateSavings() {
         this.savings = this.income - this.budget;
+        document.getElementById('estimatedSavingsValue').textContent = this.savings.toFixed(2);
     }
 
     addIncome(amount, source) {
@@ -216,16 +217,13 @@ class Income {
             category: category,
             amount: parseFloat(amount),
         };
-
         // Add the budget entry to the budgetCategories array
         this.budgetCategories.push(budgetEntry);
-
         // Update the budget total
         this.updateBudgetTotal();
-
+        this.updateSavings();
         // Save the budget categories to cookies
         this.saveBudgetCategoriesToCookies();
-
         // Regenerate the budget table
         this.generateBudgetTable();
     }
@@ -239,7 +237,6 @@ class Income {
           alert('Please enter a valid budget category and amount.');
           return;
         }
-    
         this.addBudgetEntry(categoryInput, amountInput);
         this.generateBudgetTable();
     }
@@ -256,6 +253,7 @@ class Income {
     deleteBudgetEntry(index) {
         this.budgetCategories.splice(index, 1);
         this.updateBudgetTotal();
+        this.updateSavings();
         this.saveBudgetCategoriesToCookies();
         this.generateBudgetTable();
     }
