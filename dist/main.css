@@ -87,7 +87,7 @@ p {
   margin-left: 3rem;
   margin-right: 3rem;
   margin-bottom: 3rem;
-  gap: 30px;
+  gap: 280px;
 }
 
 #incomeChart {
@@ -98,8 +98,8 @@ p {
 }
 
 #incomeBarChart {
-  height: 400px; /* Adjust the height as needed */
-  width: 400px; /* Adjust the width as needed */
+  height: 380px; /* Adjust the height as needed */
+  width: 490px; /* Adjust the width as needed */
   background-color: var(--white);
   border-radius: 20px;
 }
@@ -113,7 +113,6 @@ p {
   justify-content: space-around;
 }
 
-.income-details,
 .detail-recents {
   display: flex;
   height: 20rem;
@@ -203,10 +202,9 @@ select {
   text-align: center;
 }
 
-#incBudCompareChart {
-  height: 380px !important;
-  width: 30rem !important;
-  background-color: var(--white);
+.budget-container {
+  display: flex;
+  justify-content: space-around;
 }
 
 /* EXpenses */

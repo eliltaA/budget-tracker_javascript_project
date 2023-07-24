@@ -7,16 +7,17 @@ class Income {
         this.budget = "";
         this.savings = this.income - this.budget;
         this.incomeCategories = this.getIncomeCategories();
-        this.budgetCategories = this.getBudgetCategories();
+        this.budgetCategories = [];
+        this.budgetAddBtn = document.getElementById("budgetAddbtn")
         this.incomeAddForm = document.getElementById("incomeAddForm")
         this.incomeAddForm.addEventListener("submit", this.addIncomeForm.bind(this))
         this.loadFromCookies();
         this.incomeData = []; // Initialize incomeData as an empty array
         this.incomeLabels = [];
         this.generateIncomeTable();
-        // document.getElementById("budgetBtn").addEventListener("click", () => {
-        //     window.location.href = "budget.html";
-        //   });
+        this.loadBudgetCategoriesFromCookies();
+        this.updateBudgetTotal();
+        this.generateBudgetTable();
     }
 
      setCookie(name, value, daysToExpire) {
@@ -50,7 +51,7 @@ class Income {
           this.income = parseFloat(incomeFromCookie);
         }
         if (sourcesFromCookie) {
-            this.incomes = JSON.parse(sourcesFromCookie).map(source => ({ source: source }));
+            this.incomes = JSON.parse(sourcesFromCookie);
         }
         if (budgetFromCookie) {
           this.budget = parseFloat(budgetFromCookie);
@@ -61,7 +62,7 @@ class Income {
       // Save income and budget to cookies
     saveToCookies() {
         this.setCookie('income', this.income, 7); 
-        this.setCookie("sources", JSON.stringify(this.incomes.map((income) => income.source)), 7)
+        this.setCookie("sources", JSON.stringify(this.incomes.map((income) => income)), 7)
         this.setCookie('budget', this.budget, 7); 
     }
 
@@ -76,6 +77,7 @@ class Income {
           amount: parseFloat(amount),
           source: source,
         };
+        console.log(incomeDetails)
         this.income += parseFloat(amount)
         // Add the income details to the incomes array
         // this.incomeCategories.push(source)
@@ -113,7 +115,7 @@ class Income {
         
         this.incomeData = []; // Clear the incomeData array
         this.incomeLabels = [];
-        console.log(this.incomes);
+        console.log(this.incomes, "incomes");
         this.incomes.forEach((income) => {
           const newRow = document.createElement("tr");
           newRow.innerHTML = `
@@ -199,25 +201,101 @@ class Income {
         });
     }
 
-    getBudgetCategories() {
-        const budgetCategories = this.getCookie("budgetCategories");
-        return budgetCategories ? JSON.parse(budgetCategories) : [];
+    loadBudgetCategoriesFromCookies() {
+        const budgetCategoriesFromCookie = this.getCookie('budgetCategories');
+        if (budgetCategoriesFromCookie) {
+            this.budgetCategories = JSON.parse(budgetCategoriesFromCookie);
+        } else {
+            this.budgetCategories = [];
+        }
+    }
+
+    addBudgetEntry(category, amount) {
+        // Create an object representing the budget entry
+        const budgetEntry = {
+            category: category,
+            amount: parseFloat(amount),
+        };
+
+        // Add the budget entry to the budgetCategories array
+        this.budgetCategories.push(budgetEntry);
+
+        // Update the budget total
+        this.updateBudgetTotal();
+
+        // Save the budget categories to cookies
+        this.saveBudgetCategoriesToCookies();
+
+        // Regenerate the budget table
+        this.generateBudgetTable();
+    }
+
+    addBudgetForm(e) {
+        e.preventDefault();
+        const categoryInput = document.getElementById("budgetCategoryInput").value;
+        const amountInput = document.getElementById("budgetAmountInput").value;
+    
+        if (categoryInput.trim() === '' || amountInput.trim() === '' || isNaN(parseFloat(amountInput))) {
+          alert('Please enter a valid budget category and amount.');
+          return;
+        }
+    
+        this.addBudgetEntry(categoryInput, amountInput);
+        this.generateBudgetTable();
+    }
+
+    saveBudgetCategoriesToCookies() {
+        this.setCookie('budgetCategories', JSON.stringify(this.budgetCategories), 7);
+    }
+
+    updateBudgetTotal() {
+        const totalBudget = this.budgetCategories.reduce((total, entry) => total + parseFloat(entry.amount), 0);
+        this.budget = totalBudget;
+    }
+    
+    deleteBudgetEntry(index) {
+        this.budgetCategories.splice(index, 1);
+        this.updateBudgetTotal();
+        this.saveBudgetCategoriesToCookies();
+        this.generateBudgetTable();
+    }
+    
+    generateBudgetTable() {
+        const tableBody = document.getElementById("incomeBudgetTableBody");
+        tableBody.innerHTML = "";
+    
+        this.budgetCategories.forEach((entry, index) => {
+          const newRow = document.createElement("tr");
+          newRow.innerHTML = `
+            <td>${entry.category}</td>
+            <td>$${entry.amount}</td>
+            <td><button class="delete-btn" data-index="${index}">Delete</button></td>
+          `;
+          tableBody.appendChild(newRow);
+        });
+         const deleteButtons = document.querySelectorAll(".delete-btn");
+         deleteButtons.forEach((button) => {
+          button.addEventListener("click", (e) => {
+            const index = e.target.dataset.index;
+            this.deleteBudgetEntry(index);
+          });
+        });
+    
+        document.getElementById('incomeBudgetValue').textContent = this.budget;
       }
     
-
-    // initPageSwitching() {
-    //     const pages = document.querySelectorAll('.page');
-    //     const buttons = document.querySelectorAll('.header-headings button');
-
-    //     buttons.forEach((button, index) => {
-    //         button.addEventListener('click', () => {
-    //             pages.forEach((page) => page.classList.remove('active-page'));
-    //             pages[index].classList.add('active-page');
-    //         });
-    //     });
-    // }
+    
+    
+    initiate() {
+        //document.getElementById('incomeValue').textContent = this.income;
+        document.getElementById('incomeBudgetValue').textContent = this.budget;
+        document.getElementById("budgetAddForm").addEventListener("submit", this.addBudgetForm.bind(this));
+        this.loadBudgetCategoriesFromCookies();
+        this.updateBudgetTotal();
+        this.generateBudgetTable();
+      }
+    
 }
 
 const incomeObj = new Income()
-// incomeObj.initPageSwitching();
 export default incomeObj;

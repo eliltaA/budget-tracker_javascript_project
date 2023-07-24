@@ -76,17 +76,8 @@
                           </tr>
                         </thead>
                         <tbody id="incomeTableBody">
-                          <!-- Table rows will be generated dynamically -->
                         </tbody>
                       </table>
-                    <!-- <table>
-                      <tbody id="incomeChartTableBody">
-                        <tr>
-                          <th>Total Income:</th>
-                          <th><p id="incomeValue"></p></th>
-                        </tr>
-                      </tbody>
-                    </table> -->
                    </div>
                 </div> 
                 <!-- income chart -->
@@ -99,7 +90,29 @@
 
             <!-- <div class="page" id="budgetPage"> -->
             <div class="budget-container hidden">
-                <div class="income-info-summary">
+                <form action="" id="budgetAddForm">
+                    <div class="budget-from-inputs">
+                        <div class="forms">
+                            <label for="">Category:</label>
+                            <input 
+                                type="text"
+                                id="budgetCategoryInput"
+                                placeholder="Enter category"
+                            >
+                        </div>
+                        <div class="forms">
+                            <label for="">Amount:</label>
+                            <input 
+                                type="number"
+                                id="budgetAmountInput"
+                                placeholder="Enter amount"
+                            >
+                        </div>
+                    </div>
+                    <div class="forms"> 
+                        <input type="submit" value="Add">
+                    </div>
+                <!-- <div class="income-info-summary"> -->
                     <div class="income-budget-summary">
                       <h3>Budget Plan</h3>
                       <div class="budget-table">
@@ -116,16 +129,14 @@
                               </td>
                               <td><input type="number" id="budgetInput" /></td>
                               <td>
-                                <button id="budgetAddBtn" class="add-btn">
-                                  add
-                                </button>
+                                <button id="budgetAddForm" class="add-btn">add</button>
                               </td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
                     </div>
-                  </div>
+
                   <div class="detail-recents">
                     <!-- income budget compare -->
                     <div class="incomeBudgetCompare">
@@ -149,13 +160,13 @@
                     </div>
                     <!-- income budget compare -->
                   </div>
-                </div>
-              </div>
-                </div>
                 <!-- </div> -->
+              </div>
+                <!-- </div> -->
+            <!-- </div> -->
                 
               <!-- expense container -->
-              <!-- <div class="expense-container">
+              <div class="expense-container hidden">
                 <div class="info">
                     <div class="info-add-new">
                         <div class="income-info-add">
@@ -199,7 +210,11 @@
                     <tbody id="allExpensesBody"></tbody>
                   </table>
                 </div>
-              </div> -->
+              </div>
+
+              <div class="summary-container hidden">
+            </div>
+            </div>
 
 </body>
 </html>
