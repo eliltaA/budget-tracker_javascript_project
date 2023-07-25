@@ -90,7 +90,7 @@
               <canvas id="incomeChart" width="400" height="400"></canvas>
               <canvas id="incomeBarChart" width="400" height="200"></canvas>
             </div> -->
-            </div>
+            <!-- </div> -->
 
             <!-- <div class="page" id="budgetPage"> -->
             <div class="budget-container hidden">
@@ -116,6 +116,7 @@
                     <div class="forms"> 
                         <input type="submit" value="Add">
                     </div>
+             </form>
                 <!-- <div class="income-info-summary"> -->
                     <div class="income-budget-summary">
                       <h3>Budget Plan</h3>
@@ -167,8 +168,8 @@
                   </div>
                 <!-- </div> -->
               </div>
-                <!-- </div> -->
-            <!-- </div> -->
+               
+           
                 
               <!-- expense container -->
               <div class="expense-container hidden">
@@ -190,15 +191,25 @@
                                         <label for="">Tag:</label>
                                         <select name="" id="existingExpenseInput"></select>
                                     </div>
-                                </div>
-                                <div class="forms"> 
-                                    <input type="submit" value="submit">
-                                </div>
+                                    
+                                    <div class="forms">
+                                        <label for="newExpenseCategory">New Expense Category:</label>
+                                        <input 
+                                            type="text"
+                                            id="newExpenseCategory"
+                                            placeholder="Enter new category"
+                                        >
+                                    </div>
+                                    <div class="forms"> 
+                                     <input type="submit" value="submit">
+                                 </div>
+                             </div>
                             </form>
                         </div>
                     </div>
-
                 </div>
+            
+
               <div class="info-summary"></div>
               <div class="all-expenses-div">
                 <h3>Latest Transactions</h3>
@@ -220,6 +231,8 @@
               <div class="summary-container hidden">
             </div>
             </div>
+        </div>
+
 
 </body>
 </html>

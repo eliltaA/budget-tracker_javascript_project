@@ -19,12 +19,12 @@ class Tracker {
     this.tabDivs = [this.incomeDiv, this.budgetDiv, this.expenseDiv, this.summaryDiv];
     this.tabBtns = [this.incomeBtn, this.budgetBtn, this.expenseBtn, this.summaryBtn];
 
-    this.summaryBudgetTableBody = document.getElementById(
-      'summaryIncomeBudgetTableBody'
-    );
-    this.summaryCategoryExpense = document.getElementById(
-      'summaryCatExpensesList'
-    );
+    // this.summaryBudgetTableBody = document.getElementById(
+    //   'summaryIncomeBudgetTableBody'
+    // );
+    // this.summaryCategoryExpense = document.getElementById(
+    //   'summaryCatExpensesList'
+    // );
 
     //event handlers
     this.incomeBtn.addEventListener('click', this.showTab.bind(this));
