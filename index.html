@@ -19,7 +19,7 @@
             <button class="add-btn " id="incomeBtn">Income</button>
             <button class="add-btn" id="expenseBtn">Expenses</button>
             <button class="add-btn" id="budgetBtn">Budget</button>
-            <button class="add-btn" id="summaryBtn">Summary</button>
+            <button class="add-btn active-tab" id="summaryBtn">Summary</button>
             </div>
         </div>
             <div class="element-container">
@@ -43,8 +43,9 @@
                     <div class="forms">
                         <label for="">Existing Source:</label>
                         <select name="" id="existingIncomeSource">
+                        <option value="" >Select</option>
                         <option value="salary">Salary</option>
-                        <!-- <option value="youtube">Youtube</option> -->
+                        <option value="developer">Developer</option>
                         </select>
                     </div>
                     <p>OR</p>
@@ -203,7 +204,12 @@
                                     <div class="forms">
                                         <label for="">Tag:</label>
                                         <select name="" id="existingExpenseTagInput">
-                                            <option value="select" disabled>Select</option>
+                                            <option value="" >Select</option>
+                                            <option value="miscellaneous">miscellaneous</option>
+                                            <option value="Utility Bills">Utility Bills</option>
+                                            <option value="Food and Groceries">Food and Groceries</option>
+                                            <option value="Housing or Rent">Housing or Rent</option>
+                                            
                                         </select>
                                     </div>
                                     

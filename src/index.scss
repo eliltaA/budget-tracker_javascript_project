@@ -110,18 +110,21 @@
     margin-top: 2rem;
     margin-left: 5rem;
     margin-right: 5rem;
-    overflow: auto;
+    // overflow: auto;
     display: flex;
     justify-content: space-around;
+    overflow-y: scroll;
   }
   
   .budget-table {
     display: flex;
+    justify-content: space-around;
     height: 20rem;
     width: 30rem; 
     background-color: var(--white);
     border-radius: 20px;
     padding: 1rem;
+    overflow-y: scroll;
   }
   
   .detail-recents {
