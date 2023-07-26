@@ -143,15 +143,45 @@ class Expense {
                         {
                             data: data,
                             backgroundColor: [
-                                "rgba(255, 99, 132, 0.7)",
-                                "rgba(54, 162, 235, 0.7)",
-                                "rgba(255, 206, 86, 0.7)",
-                                // Add more colors here for additional categories
+                            'rgb(255, 99, 132, 0.8)',
+                            'rgb(255, 159, 64, 0.7)',
+                            'rgb(255, 205, 86, 0.8)',
+                            'rgb(75, 192, 192, 0.7)',
+                            'rgb(54, 162, 235, 0.7)',
+                            'rgb(1, 142, 203, 0.7)',
+                            'rgb(106, 144, 204, 0.7)',
+                            'rgb(1, 142, 203, 0.7)',
+                            'rgb(102, 55, 221, 0.8)',
                             ],
                         },
                     ],
                 },
-            });
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Expense Overview',
+                            font: {
+                                size: 25,
+                                weight: 'bold',
+                            },
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    const label = context.label || '';
+                                    const value = context.parsed.y || 0;
+                                    return label + ': $' + value.toFixed(2);
+                                },
+                            },
+                        },
+                    },
+                },
+            })
         }
     }
     

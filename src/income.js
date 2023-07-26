@@ -168,13 +168,35 @@ class Income {
                             'rgb(1, 142, 203, 0.7)',
                             'rgb(106, 144, 204, 0.7)',
                             'rgb(1, 142, 203, 0.7)',
-                            'rgb(102, 55, 221, 0.7)',
+                            'rgb(102, 55, 221, 0.9)',
                         ],
                     },
                 ],
             },
             options: {
-                // Add any custom options for the chart here
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Income Overview',
+                        padding: {
+                            top: 15,
+                            bottom: 15,
+                        },
+                        font: {
+                            size: 25,
+                            weight: 'bold',
+                        },
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => {
+                                const label = context.label || '';
+                                const value = context.parsed.y || 0;
+                                return label + ': $' + value.toFixed(2);
+                            },
+                        },
+                    },
+                },
             },
         });
     }
@@ -329,6 +351,26 @@ class Income {
                         beginAtZero: true,
                     },
                 },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Income vs. Budget vs. Savings",
+                        font: {
+                            size: 20,
+                            weight: 'bold',
+                            color: 'rgba(0, 0, 0, 1)',
+                        },
+                    },
+                    datalabels: {
+                        align: 'end',
+                        anchor: 'end',
+                        color: 'black',
+                        font: {
+                            weight: 'bold',
+                        },
+                        formatter: (value) => `$${value}`, // Display amount with a dollar sign
+                    },
+                },
             },
         });
     }
@@ -362,9 +404,33 @@ class Income {
                     },
                 ],
             },
-                options: {
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Budget Overview',
+                        padding: {
+                            top: 15,
+                            bottom: 15,
+                        },
+                        font: {
+                            size: 25,
+                            weight: 'bold',
+                            color: 'black',
+                        },
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => {
+                                const label = context.label || '';
+                                const value = context.parsed.y || 0;
+                                return label + ': $' + value.toFixed(2);
+                            },
+                        },
+                    },
                 },
-            });
+            },
+        });
         }
     
     
