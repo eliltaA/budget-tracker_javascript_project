@@ -47,7 +47,7 @@ p {
 
 .info {
   margin-top: 2rem;
-  margin-left: 3rem;
+  margin-left: 5rem;
   display: flex;
   /* justify-content: space-around; */
 }
@@ -70,8 +70,7 @@ p {
 }
 
 .info-add-new,
-.income-details,
-.chart-container {
+.income-details {
   display: flex;
   flex: 1;
   height: 20rem;
@@ -84,30 +83,30 @@ p {
 .chart-container {
   display: flex;
   margin-top: 2rem;
-  margin-left: 3rem;
-  margin-right: 3rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
   margin-bottom: 3rem;
-  gap: 280px;
+  gap: 250px;
 }
 
 #incomeChart {
-  height: 400px;
-  width: 400px;
+  height: 450px !important;
+  width: 480px !important;
   background-color: var(--white);
+  margin-bottom: 1rem !important;
   border-radius: 20px;
 }
 
 #incomeBarChart {
-  height: 380px;
-  width: 490px;
+  height: 380px !important;
   background-color: var(--white);
   border-radius: 20px;
 }
 
 .income-details {
   margin-top: 2rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
   overflow: auto;
   display: flex;
   justify-content: space-around;
@@ -124,11 +123,20 @@ p {
 
 .detail-recents {
   display: flex;
-  height: 20rem;
-  width: 30rem;
+  height: 10rem;
+  width: 20rem;
   background-color: var(--white);
   border-radius: 20px;
   padding: 1rem;
+}
+
+.detail-recents table td {
+  padding: 1.8rem 4rem;
+}
+
+/* Optionally, you can adjust the font size to fit the smaller box */
+.detail-recents table td {
+  font-size: 19px;
 }
 
 .add-btn,
@@ -211,6 +219,24 @@ select {
   text-align: center;
 }
 
+.flexB {
+  display: flex;
+  gap: 200px;
+}
+
+#budgetDoughnutChart {
+  height: 450px !important; /* Adjust the height as needed */
+  width: 480px !important; /* Adjust the width as needed */
+  background-color: var(--white);
+  border-radius: 20px;
+}
+
+#incomeVsBudgetChart {
+  height: 380px !important;
+  background-color: var(--white);
+  border-radius: 20px;
+}
+
 /* EXpenses */
 .expense-form-inputs {
   display: flex;
@@ -233,9 +259,9 @@ select {
   flex-direction: column;
 }
 
-.expense-chart {
-  height: 400px; /* Adjust the height as needed */
-  width: 400px; /* Adjust the width as needed */
+#expenseDoughnutChart {
+  height: 400px !important; /* Adjust the height as needed */
+  width: 400px !important; /* Adjust the width as needed */
   background-color: var(--white);
   border-radius: 20px;
 }

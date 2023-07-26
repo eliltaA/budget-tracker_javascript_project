@@ -20,6 +20,7 @@ class Income {
         this.updateSavings();
         this.generateBudgetTable();
         this.generateBarChart();
+        this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
     }
 
      setCookie(name, value, daysToExpire) {
@@ -154,15 +155,15 @@ class Income {
                     {
                         data: data,
                         backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 159, 64)',
-                            'rgb(255, 205, 86)',
-                            'rgb(75, 192, 192)',
-                            'rgb(54, 162, 235)',
-                            'rgb(1, 142, 203)',
-                            'rgb(106, 144, 204)',
-                            'rgb(1, 142, 203)',
-                            'rgb(102, 55, 221)',
+                            'rgb(255, 99, 132, 0.7)',
+                            'rgb(255, 159, 64, 0.7)',
+                            'rgb(255, 205, 86, 0.8)',
+                            'rgb(75, 192, 192, 0.7)',
+                            'rgb(54, 162, 235, 0.7)',
+                            'rgb(1, 142, 203, 0.7)',
+                            'rgb(106, 144, 204, 0.7)',
+                            'rgb(1, 142, 203, 0.7)',
+                            'rgb(102, 55, 221, 0.7)',
                         ],
                     },
                 ],
@@ -188,7 +189,7 @@ class Income {
                     {
                         label: "Income Amount",
                         data: data,
-                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
                         borderColor: 'rgba(54, 162, 235, 1)',
                         borderWidth: 1,
                     },
@@ -228,6 +229,7 @@ class Income {
         this.saveBudgetCategoriesToCookies();
         // Regenerate the budget table
         this.generateBudgetTable();
+        this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
     }
 
     addBudgetForm(e) {
@@ -258,7 +260,9 @@ class Income {
         this.updateSavings();
         this.saveBudgetCategoriesToCookies();
         this.generateBudgetTable();
+        this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
     }
+    
     
     generateBudgetTable() {
         const tableBody = document.getElementById("incomeBudgetTableBody");
@@ -323,6 +327,41 @@ class Income {
             },
         });
     }
+
+    updateBudgetDoughnutChart(labels, data) {
+        const budgetDoughnutChart = document.getElementById("budgetDoughnutChart").getContext("2d");
+
+        if (this.budgetDoughnutChartInstance) {
+            // If the chart already exists, destroy it first
+            this.budgetDoughnutChartInstance.destroy();
+        }
+
+        this.budgetDoughnutChartInstance = new Chart(budgetDoughnutChart, {
+            type: "doughnut",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        data: data,
+                        backgroundColor: [
+                            'rgb(255, 99, 132, 0.7)',
+                            'rgb(255, 159, 64, 0.7)',
+                            'rgb(255, 205, 86, 0.8)',
+                            'rgb(75, 192, 192, 0.7)',
+                            'rgb(54, 162, 235, 0.7)',
+                            'rgb(1, 142, 203, 0.7)',
+                            'rgb(106, 144, 204, 0.7)',
+                            'rgb(1, 142, 203, 0.7)',
+                            'rgb(102, 55, 221, 0.7)',
+                        ],
+                    },
+                ],
+            },
+                options: {
+                },
+            });
+        }
+    
     
     initiate() {
         //document.getElementById('incomeValue').textContent = this.income;
