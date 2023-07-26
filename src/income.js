@@ -104,6 +104,10 @@ class Income {
             this.updateSavings();
             this.saveToCookies();
             this.generateIncomeTable();
+
+        document.getElementById("newIncomeInput").value = '';
+        document.getElementById("newIncomeSource").value = '';
+        document.getElementById("existingIncomeSource").value = '';
         }
         //  location.reload();
     }
@@ -119,8 +123,9 @@ class Income {
         
         this.incomeData = []; // Clear the incomeData array
         this.incomeLabels = [];
-        console.log(this.incomes, "incomes");
-        this.incomes.forEach((income) => {
+        // console.log(this.incomes, "incomes");
+        const reversedIncomes = this.incomes.slice().reverse();
+        reversedIncomes.forEach((income) => {
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
             <td>${income.source}</td>

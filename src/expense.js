@@ -7,7 +7,6 @@ class Expense {
         this.expenseAddForm.addEventListener("submit", this.addExpenseForm.bind(this));
         this.loadFromCookies();
         this.generateExpenseTable();
-        this.populateTagSelect();
         this.generateDoughnutChart()
     }
 
@@ -53,6 +52,7 @@ class Expense {
         this.expenses.push(expenseDetails);
         this.saveToCookies();
         this.generateExpenseTable();
+        this.generateDoughnutChart()
         // this.generateExpenseChart();
     }
 
@@ -63,7 +63,7 @@ class Expense {
         const newExpenseCategoryInput = document.getElementById("newExpenseCategory").value;
         const categories = existingExpenseInput || newExpenseCategoryInput
        
-        if (existingExpenseInput.trim() === 'select' && newExpenseCategoryInput.trim() === ('')) {
+        if (existingExpenseInput.trim() === '' && newExpenseCategoryInput.trim() === ('')) {
             alert('Please enter a valid expense category.');
             return;
         }
@@ -72,20 +72,23 @@ class Expense {
             return;
         }
         this.addExpense(newExpenseInput, categories);
+        document.getElementById("newExpenseInput").value = '';
+        document.getElementById("existingExpenseTagInput").value = '';
+        document.getElementById("newExpenseCategory").value = '';
     }
 
     //   [{"amount":200,"categories":"clothes"},{"amount":500,"categories":"gas"}]
-      populateTagSelect() {
-        const selectElement = document.getElementById("existingExpenseTagInput");
-        selectElement.innerHTML = ""; 
-        // Add each expense category as an option in the select element
-        this.expenses.forEach((expense) => {
-          const optionElement = document.createElement("option");
-          optionElement.value = expense.categories;
-          optionElement.textContent = expense.categories;
-          selectElement.appendChild(optionElement);
-        });
-      }
+    //   populateTagSelect() {
+    //     const selectElement = document.getElementById("existingExpenseTagInput");
+    //     selectElement.innerHTML = ""; 
+    //     // Add each expense category as an option in the select element
+    //     this.expenses.forEach((expense) => {
+    //       const optionElement = document.createElement("option");
+    //       optionElement.value = expense.categories;
+    //       optionElement.textContent = expense.categories;
+    //       selectElement.appendChild(optionElement);
+    //     });
+    //   }
 
     generateExpenseTable() {
         const tableBody = document.getElementById("allExpensesBody");
@@ -100,7 +103,7 @@ class Expense {
             `;
             tableBody.appendChild(newRow);
         });
-        
+    
     }
 
 
@@ -126,7 +129,13 @@ class Expense {
             const labels = Object.keys(categoryTotals);
             const data = Object.values(categoryTotals);
     
-            const doughnutChart = new Chart(ctx, {
+            if (this.expenseDoughnutChartInstance) {
+                // If the chart already exists, update its data
+                this.expenseDoughnutChartInstance.data.labels = labels;
+                this.expenseDoughnutChartInstance.data.datasets[0].data = data;
+                this.expenseDoughnutChartInstance.update();
+            } else {
+                this.expenseDoughnutChartInstance = new Chart(ctx, {
                 type: "doughnut",
                 data: {
                     labels: labels,
@@ -143,6 +152,7 @@ class Expense {
                     ],
                 },
             });
+        }
     }
     
     
