@@ -51,7 +51,7 @@
   }
   
   .income-container {
-    display: flex;
+    // display: flex;
     gap: 30px;
     align-items: flex-start;
   }
@@ -61,6 +61,11 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+  }
+
+  .flex{
+    display: flex;
+    flex: auto;
   }
 
   .info-add-new,
@@ -86,17 +91,15 @@
 
 
   #incomeChart {
-    height: 400px; /* Adjust the height as needed */
-    width: 400px; /* Adjust the width as needed */
+    height: 400px; 
+    width: 400px; 
     background-color: var(--white);
     border-radius: 20px;
   }
   
   #incomeBarChart {
-    // display: flex;
-    // justify-content: space-between;
-    height: 380px; /* Adjust the height as needed */
-    width: 490px; /* Adjust the width as needed */
+    height: 380px; 
+    width: 490px; 
     background-color: var(--white);
     border-radius: 20px;
   }
@@ -110,11 +113,19 @@
     justify-content: space-around;
   }
   
+  .budget-table {
+    display: flex;
+    height: 20rem;
+    width: 30rem; 
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 1rem;
+  }
   
   .detail-recents {
     display: flex;
-     height: 20rem;
-     width: 30rem; 
+    height: 20rem;
+    width: 30rem; 
     background-color: var(--white);
     border-radius: 20px;
     padding: 1rem;
@@ -136,7 +147,7 @@
     background-color: darkcyan;
   }
   
-  .del-btn {
+  .delete-btn {
     background-color: var(--tomato);
     border: none;
     border-radius: 6px;
@@ -207,10 +218,10 @@
 //     margin-bottom: 3rem !important;
 //   }
 
-.budget-container{
-  display: flex;
-  justify-content: space-around;
-}
+// .budget-container{
+//   display: flex;
+//   justify-content: space-around;
+// }
   
   // #incBudCompareChart {
   //   height: 380px !important;
@@ -224,21 +235,40 @@
     gap: 20px;
   }
   
-  .all-expenses-div {
+  .flexEx{
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    justify-content: space-evenly;
   }
   
-  .detail-expense-category, .detail-expense-recents, .detail-summary-category, .detail-summary-recents {
+
+  .all-expenses-div {
     display: flex;
     height: 20rem;
-    width: 30rem;
+      width: 30rem;
+      background-color: var(--white);
+      border-radius: 20px;
+      margin-top: 2rem;
+      padding: 1rem;
+    flex-direction: column;
+    // width: 100%;
+  }
+
+  .expense-chart{
+    height: 400px; /* Adjust the height as needed */
+    width: 400px; /* Adjust the width as needed */
     background-color: var(--white);
     border-radius: 20px;
-    padding: 1rem;
-    flex-direction: column;
   }
+  
+  // .detail-expense-category, .detail-expense-recents, .detail-summary-category, .detail-summary-recents {
+  //   display: flex;
+  //   height: 20rem;
+  //   width: 30rem;
+  //   background-color: var(--white);
+  //   border-radius: 20px;
+  //   padding: 1rem;
+  //   flex-direction: column;
+  // }
   
   .exhaustionDiv, .innerexhaustionDiv {
     height: 1.2rem;

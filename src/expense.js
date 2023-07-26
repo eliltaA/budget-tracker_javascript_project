@@ -1,3 +1,5 @@
+import Chart from 'chart.js/auto';
+
 class Expense {
     constructor(){
         this.expenses = [];
@@ -5,7 +7,8 @@ class Expense {
         this.expenseAddForm.addEventListener("submit", this.addExpenseForm.bind(this));
         this.loadFromCookies();
         this.generateExpenseTable();
-       
+        this.populateTagSelect();
+        this.generateDoughnutChart()
     }
 
     setCookie(name, value, daysToExpire) {
@@ -56,38 +59,39 @@ class Expense {
     addExpenseForm(e) {
         e.preventDefault();
         const newExpenseInput = document.getElementById("newExpenseInput").value;
-        const existingExpenseInput = document.getElementById("existingExpenseInput").value;
+        const existingExpenseInput = document.getElementById("existingExpenseTagInput").value;
         const newExpenseCategoryInput = document.getElementById("newExpenseCategory").value;
         const categories = existingExpenseInput || newExpenseCategoryInput
        
-        // if (newTag.trim() === '') {
-        //     alert('Please enter a valid expense category.');
-        //     return;
-        // }
-        // if (newExpenseInput.trim() === '' || isNaN(parseFloat(newExpenseInput))) {
-        //     alert('Please enter a valid expense amount.');
-        //     return;
-        // }
+        if (existingExpenseInput.trim() === 'select' && newExpenseCategoryInput.trim() === ('')) {
+            alert('Please enter a valid expense category.');
+            return;
+        }
+        if (newExpenseInput.trim() === '' || isNaN(parseFloat(newExpenseInput))) {
+            alert('Please enter a valid expense amount.');
+            return;
+        }
         this.addExpense(newExpenseInput, categories);
     }
 
-    // populateTagSelect(){  //[{"amount":200,"categories":"clothes"},{"amount":500,"categories":"gas"}]
-    //     const selectElement = document.getElementById("existingExpenseInput");
-    //     selectElement.innerHTML = ""; // Clear existing options
-
-    //     // Add each budget category as an option in the select element
-    //     this.expenses.forEach((category) => {
-    //         const optionElement = document.createElement("option");
-    //         optionElement.value = category;
-    //         optionElement.textContent = category;
-    //         selectElement.appendChild(optionElement);
-    //     });
-    // }
+    //   [{"amount":200,"categories":"clothes"},{"amount":500,"categories":"gas"}]
+      populateTagSelect() {
+        const selectElement = document.getElementById("existingExpenseTagInput");
+        selectElement.innerHTML = ""; 
+        // Add each expense category as an option in the select element
+        this.expenses.forEach((expense) => {
+          const optionElement = document.createElement("option");
+          optionElement.value = expense.categories;
+          optionElement.textContent = expense.categories;
+          selectElement.appendChild(optionElement);
+        });
+      }
 
     generateExpenseTable() {
         const tableBody = document.getElementById("allExpensesBody");
         tableBody.innerHTML = "";
-        this.expenses.forEach((expense, index) => {
+        const reversedExpenses = this.expenses.slice().reverse();
+        reversedExpenses.forEach((expense, index) => {
             const newRow = document.createElement("tr");
             newRow.innerHTML = `
                 <td>${index + 1}</td>
@@ -105,6 +109,43 @@ class Expense {
     }
 
 
+    
+    generateDoughnutChart() {
+            const ctx = document.getElementById("expenseDoughnutChart").getContext("2d");
+    
+            // Get unique expense categories and calculate their total amounts
+            const categoryTotals = {};
+            this.expenses.forEach((expense) => {
+                if (categoryTotals[expense.categories]) {
+                    categoryTotals[expense.categories] += expense.amount;
+                } else {
+                    categoryTotals[expense.categories] = expense.amount;
+                }
+            });
+    
+            const labels = Object.keys(categoryTotals);
+            const data = Object.values(categoryTotals);
+    
+            const doughnutChart = new Chart(ctx, {
+                type: "doughnut",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            data: data,
+                            backgroundColor: [
+                                "rgba(255, 99, 132, 0.7)",
+                                "rgba(54, 162, 235, 0.7)",
+                                "rgba(255, 206, 86, 0.7)",
+                                // Add more colors here for additional categories
+                            ],
+                        },
+                    ],
+                },
+            });
+    }
+    
+    
 
 
     initiate() {}

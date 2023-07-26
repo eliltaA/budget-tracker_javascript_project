@@ -13,18 +13,19 @@
 <body>
     
     <div class="js-container">
-        <h1>Budget Tracker</h1>
+        <h1>Budget Tracker App</h1>
         <div class="header">
             <div class="header-headings">
-              <button class="add-btn " id="incomeBtn">Income</button>
-              <button class="add-btn" id="expenseBtn">Expenses</button>
-              <button class="add-btn" id="budgetBtn">Budget</button>
-              <button class="add-btn" id="summaryBtn">Summary</button>
+            <button class="add-btn " id="incomeBtn">Income</button>
+            <button class="add-btn" id="expenseBtn">Expenses</button>
+            <button class="add-btn" id="budgetBtn">Budget</button>
+            <button class="add-btn" id="summaryBtn">Summary</button>
             </div>
         </div>
             <div class="element-container">
             <!-- <div class="page" id="incomePage"> -->
             <div class="income-container hidden">
+                <div class="flex">
             <div class="info">
             <div class="info-add-new">
             <div class="income-info-add">
@@ -42,8 +43,8 @@
                     <div class="forms">
                         <label for="">Existing Source:</label>
                         <select name="" id="existingIncomeSource">
-                          <option value="salary">Salary</option>
-                          <!-- <option value="youtube">Youtube</option> -->
+                        <option value="salary">Salary</option>
+                        <!-- <option value="youtube">Youtube</option> -->
                         </select>
                     </div>
                     <p>OR</p>
@@ -60,40 +61,35 @@
                     </div>
                 </form>
                 </div>
-
                 </div>
             </div>
-            <!-- <div class="detail">
-              <div class="detail-category"> -->
-                <!-- income chart -->
                 <div class="income-details">
-                  <div class="totalincome-value">
+                <div class="totalincome-value">
                     <table>
                         <thead>
-                          <tr>
+                        <tr>
                             <th>Source</th>
                             <th>Amount</th>
-                          </tr>
+                        </tr>
                         </thead>
                         <tbody id="incomeTableBody">
                         </tbody>
-                      </table>
-                   </div>
+                    </table>
+                </div>
                 </div> 
+            </div>
                 <div class="chart-container">
                     <canvas id="incomeChart" width="400" height="400"></canvas>
                     <canvas id="incomeBarChart" width="400" height="200"></canvas>
-                  </div>
+                </div>
                 <!-- income chart -->
-              </div>
-              <!-- <div class="chart-container">
-              <canvas id="incomeChart" width="400" height="400"></canvas>
-              <canvas id="incomeBarChart" width="400" height="200"></canvas>
-            </div> -->
-            <!-- </div> -->
+            </div>
 
             <!-- <div class="page" id="budgetPage"> -->
             <div class="budget-container hidden">
+                <div class="info">
+                    <div class="info-add-new">
+                    <div class="income-info-add">
                 <form action="" id="budgetAddForm">
                     <div class="budget-from-inputs">
                         <div class="forms">
@@ -116,63 +112,69 @@
                     <div class="forms"> 
                         <input type="submit" value="Add">
                     </div>
-             </form>
-                <!-- <div class="income-info-summary"> -->
-                    <div class="income-budget-summary">
-                      <h3>Budget Plan</h3>
-                      <div class="budget-table">
-                        <table id="budgetTable">
-                          <thead>
-                            <th>Category</th>
-                            <th>Amount</th>
-                            <th>Action</th>
-                          </thead>
-                          <tbody id="incomeBudgetTableBody">
-                            <tr>
-                              <td>
-                                <input type="text" id="budgetCategoryInput" />
-                              </td>
-                              <td><input type="number" id="budgetInput" /></td>
-                              <td>
-                                <button id="budgetAddForm" class="add-btn">add</button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <canvas id="incomeVsBudgetChart" width="400" height="200"></canvas>
-                    </div>
+            </form>
+        </div>
+    </div> 
+</div>
+<!-- <div class="income-info-summary"> -->
+    <div class="info-summary">
+        <div class="income-info-summary">
+    <div class="income-budget-summary">
+        <h3>Budget Table</h3>
+        <div class="budget-table">
+            <table id="budgetTable">
+                <thead>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </thead>
+                <tbody id="incomeBudgetTableBody">
+                    <tr>
+                        <td>
+                            <input type="text" id="budgetCategoryInput" />
+                        </td>
+                        <td><input type="number" id="budgetInput" /></td>
+                        <td>
+                            <button id="budgetAddForm" class="add-btn">add</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
 
-                  <div class="detail-recents">
-                    <!-- income budget compare -->
+    
+    <!-- income budget compare -->
+    <div class="detail-recents">
                     <div class="incomeBudgetCompare">
-                      <table>
+                    <div>
                         <tbody id="budgetChartTableBody">
-                          <tr>
+                        <tr>
                             <th>Total Budget:</th>
                             <th><span id="incomeBudgetValue"></span></th>
-                          </tr>
+                        </tr>
                         </tbody>
-                      </table>
-                      <table>
+                    </div>
+                    <div>
                         <tbody>
-                          <tr>
+                        <tr>
                             <th>Estimated Savings:</th>
                             <th><span id="estimatedSavingsValue"></span></th>
-                          </tr>
+                        </tr>
                         </tbody>
-                      </table>
-                      <canvas id="incBudCompareChart"></canvas>
                     </div>
-                    <!-- income budget compare -->
-                  </div>
-                <!-- </div> -->
-              </div>
-               
-           
+                    </div>
+                </div>
+                <canvas id="incomeVsBudgetChart" width="400" height="200"></canvas>
+            </div>
+            
+        
                 
-              <!-- expense container -->
-              <div class="expense-container hidden">
+        <!-- expense container -->
+            <div class="expense-container hidden">
+                <div class="flexEx">
                 <div class="info">
                     <div class="info-add-new">
                         <div class="income-info-add">
@@ -188,11 +190,6 @@
                                         >
                                     </div>
                                     <div class="forms">
-                                        <label for="">Tag:</label>
-                                        <select name="" id="existingExpenseInput"></select>
-                                    </div>
-                                    
-                                    <div class="forms">
                                         <label for="newExpenseCategory">New Expense Category:</label>
                                         <input 
                                             type="text"
@@ -200,35 +197,47 @@
                                             placeholder="Enter new category"
                                         >
                                     </div>
+                                    <div class="forms">
+                                        <label for="">Tag:</label>
+                                        <select name="" id="existingExpenseTagInput">
+                                            <option value="select" disabled>Select</option>
+                                        </select>
+                                    </div>
+                                    
                                     <div class="forms"> 
-                                     <input type="submit" value="submit">
-                                 </div>
-                             </div>
+                                    <input type="submit" value="submit">
+                                </div>
+                            </div>
                             </form>
                         </div>
                     </div>
                 </div>
             
 
-              <div class="info-summary"></div>
-              <div class="all-expenses-div">
+            <div class="info-summary">
+            <div class="all-expenses-div">
                 <h3>Latest Transactions</h3>
                 <div class="all-expenses">
-                  <table>
+                <table>
                     <thead>
-                      <tr>
+                    <tr>
                         <th>No.</th>
                         <th>Tag</th>
                         <th>Amount</th>
-                      </tr>
+                    </tr>
                     </thead>
                     <tbody id="allExpensesBody"></tbody>
-                  </table>
+                </table>
                 </div>
-              </div>
+            </div>
+            </div>
+        </div>
+            <div class="expense-chart">
+            <canvas id="expenseDoughnutChart" width="400" height="400"></canvas>
+            </div>
             </div>
 
-              <div class="summary-container hidden">
+            <div class="summary-container hidden">
             </div>
             </div>
         </div>

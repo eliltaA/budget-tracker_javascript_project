@@ -77,16 +77,16 @@ class Income {
     addIncome(amount, source) {
         // Create an object representing the income details
         const incomeDetails = {
-          amount: parseFloat(amount),
-          source: source,
+            amount: parseFloat(amount),
+            source: source,
         };
         console.log(incomeDetails)
         this.income += parseFloat(amount)
         // Add the income details to the incomes array
         // this.incomeCategories.push(source)
         this.incomes.push(incomeDetails);
-      }
-      
+    }
+    
     addIncomeForm(e){
         e.preventDefault();
         const newIncomeInput = document.getElementById("newIncomeInput").value;
@@ -97,7 +97,7 @@ class Income {
         if (newIncomeInput.trim() === '' || isNaN(parseFloat(newIncomeInput))) {
             alert('Please enter a valid income amount.');
             return;
-          }
+        }
         if (newIncomeInput !== ''){
             this.addIncome(newIncomeInput, newSource);
             this.updateSavings();
@@ -120,8 +120,8 @@ class Income {
         this.incomeLabels = [];
         console.log(this.incomes, "incomes");
         this.incomes.forEach((income) => {
-          const newRow = document.createElement("tr");
-          newRow.innerHTML = `
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
             <td>${income.source}</td>
             <td>$${income.amount}</td>
           `;
@@ -331,7 +331,7 @@ class Income {
         this.loadBudgetCategoriesFromCookies();
         this.updateBudgetTotal();
         this.generateBudgetTable();
-      }
+    }
     
 }
 
