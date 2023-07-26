@@ -87,6 +87,7 @@
 
             <!-- <div class="page" id="budgetPage"> -->
             <div class="budget-container hidden">
+                <div class="flexB">
                 <div class="info">
                     <div class="info-add-new">
                     <div class="income-info-add">
@@ -144,30 +145,32 @@
     </div>
 </div>
 </div>
+</div>
 
     
     <!-- income budget compare -->
-    <div class="detail-recents">
+                <div class="detail-recents">
                     <div class="incomeBudgetCompare">
-                    <div>
-                        <tbody id="budgetChartTableBody">
-                        <tr>
-                            <th>Total Budget:</th>
-                            <th><span id="incomeBudgetValue"></span></th>
-                        </tr>
-                        </tbody>
-                    </div>
-                    <div>
-                        <tbody>
-                        <tr>
-                            <th>Estimated Savings:</th>
-                            <th><span id="estimatedSavingsValue"></span></th>
-                        </tr>
-                        </tbody>
-                    </div>
+                        <table>
+                            <tbody id="budgetChartTableBody">
+                                <tr>
+                                    <th>Total Budget:</th>
+                                    <td><span id="incomeBudgetValue"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>Estimated Savings:</th>
+                                    <td><span id="estimatedSavingsValue"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            <!-- </div> -->
+            
+            <div class="chart-container">
+                <canvas id="budgetDoughnutChart" width="400" height="200"></canvas>
                 <canvas id="incomeVsBudgetChart" width="400" height="200"></canvas>
+            </div>
             </div>
             
         
@@ -232,7 +235,7 @@
             </div>
             </div>
         </div>
-            <div class="expense-chart">
+            <div class="chart-container">
             <canvas id="expenseDoughnutChart" width="400" height="400"></canvas>
             </div>
             </div>
