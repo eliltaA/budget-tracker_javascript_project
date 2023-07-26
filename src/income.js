@@ -23,7 +23,7 @@ class Income {
         this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
     }
 
-     setCookie(name, value, daysToExpire) {
+    setCookie(name, value, daysToExpire) {
         const date = new Date();
         date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
         const expires = "expires=" + date.toUTCString();
@@ -81,7 +81,7 @@ class Income {
             amount: parseFloat(amount),
             source: source,
         };
-        console.log(incomeDetails)
+        // console.log(incomeDetails)
         this.income += parseFloat(amount)
         // Add the income details to the incomes array
         // this.incomeCategories.push(source)
@@ -144,7 +144,7 @@ class Income {
         this.generateIncomeTable();
     }  
 
-    updateDoughnutChart(labels, data) {
+    updateDoughnutChart(incomeLabels, incomeData) {
         const incomeChart = document.getElementById("incomeChart").getContext("2d");
       
         if (this.incomeChartInstance) {
@@ -155,10 +155,10 @@ class Income {
         this.incomeChartInstance = new Chart(incomeChart, {
             type: "doughnut",
             data: {
-                labels: labels,
+                labels: incomeLabels,
                 datasets: [
                     {
-                        data: data,
+                        data: incomeData,
                         backgroundColor: [
                             'rgb(255, 99, 132, 0.7)',
                             'rgb(255, 159, 64, 0.7)',
@@ -168,7 +168,7 @@ class Income {
                             'rgb(1, 142, 203, 0.7)',
                             'rgb(106, 144, 204, 0.7)',
                             'rgb(1, 142, 203, 0.7)',
-                            'rgb(102, 55, 221, 0.9)',
+                            'rgb(102, 55, 221, 0.8)',
                         ],
                     },
                 ],
@@ -256,6 +256,7 @@ class Income {
         this.saveBudgetCategoriesToCookies();
         // Regenerate the budget table
         this.generateBudgetTable();
+        this.generateBarChart();
         this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
     }
 
@@ -287,6 +288,7 @@ class Income {
         this.updateSavings();
         this.saveBudgetCategoriesToCookies();
         this.generateBudgetTable();
+        this.generateBarChart();
         this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
     }
     
@@ -296,26 +298,26 @@ class Income {
         tableBody.innerHTML = "";
     
         this.budgetCategories.forEach((entry, index) => {
-          const newRow = document.createElement("tr");
-          newRow.innerHTML = `
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
             <td>${entry.category}</td>
             <td>$${entry.amount}</td>
             <td><button class="delete-btn" data-index="${index}">Delete</button></td>
-          `;
-          tableBody.appendChild(newRow);
+        `;
+        tableBody.appendChild(newRow);
         });
-         const deleteButtons = document.querySelectorAll(".delete-btn");
-         deleteButtons.forEach((button) => {
-          button.addEventListener("click", (e) => {
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        deleteButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
             const index = e.target.dataset.index;
             this.deleteBudgetEntry(index);
-          });
+        });
         });
     
         document.getElementById('incomeBudgetValue').textContent = this.budget;
-      }
+    }
     
-      generateBarChart() {
+    generateBarChart() {
         const incomeVsBudgetChart = document.getElementById("incomeVsBudgetChart").getContext("2d");
 
         if (this.incomeVsBudgetChartInstance) {
@@ -368,7 +370,6 @@ class Income {
                         font: {
                             weight: 'bold',
                         },
-                        formatter: (value) => `$${value}`, // Display amount with a dollar sign
                     },
                 },
             },

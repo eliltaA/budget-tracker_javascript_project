@@ -84,7 +84,7 @@
     margin-top: 2rem;
     margin-left: 5rem;
     margin-right: 5rem;
-    margin-bottom: 3rem;
+    // margin-bottom: 3rem;
     gap: 250px;
   }
 
@@ -140,7 +140,7 @@
     padding: 1.8rem 4rem;
   }
   
-  /* Optionally, you can adjust the font size to fit the smaller box */
+  /* adjust the font size to fit the smaller box */
   .detail-recents table td {
     font-size: 19px;
   }
@@ -231,8 +231,8 @@
   }
 
   #budgetDoughnutChart{
-    height: 450px !important; /* Adjust the height as needed */
-    width: 480px !important; /* Adjust the width as needed */
+    height: 450px !important;
+    width: 480px !important; 
     background-color: var(--white);
     border-radius: 20px;
   }
@@ -277,7 +277,8 @@
   
   .flexEx{
     display: flex;
-    justify-content: space-evenly;
+    gap: 200px;
+    // justify-content: space-evenly;
   }
   
 
@@ -294,8 +295,16 @@
   }
 
   #expenseDoughnutChart{
-    height: 400px !important; /* Adjust the height as needed */
-    width: 400px !important; /* Adjust the width as needed */
+    height: 450px !important; 
+    width: 480px !important; 
+    background-color: var(--white);
+    border-radius: 20px;
+    margin-bottom: 2rem;
+  }
+
+  #expenseBarChart{
+    height: 380px !important; 
+    // width: 500px !important; 
     background-color: var(--white);
     border-radius: 20px;
   }
@@ -364,6 +373,6 @@
   }
   
   .hidden {
-    display: none;
+    display: none !important;
   }
   

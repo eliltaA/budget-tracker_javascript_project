@@ -19,13 +19,13 @@
             <button class="add-btn " id="incomeBtn">Income</button>
             <button class="add-btn" id="expenseBtn">Expenses</button>
             <button class="add-btn" id="budgetBtn">Budget</button>
-            <button class="add-btn active-tab" id="summaryBtn">Summary</button>
+            <button class="add-btn" id="summaryBtn">Summary</button>
             </div>
         </div>
             <div class="element-container">
             <!-- <div class="page" id="incomePage"> -->
-            <div class="income-container hidden">
-                <div class="flex">
+            <div class="income-container">
+                <div class="flex hidden income-container-item">
             <div class="info">
             <div class="info-add-new">
             <div class="income-info-add">
@@ -80,15 +80,15 @@
                 </div> 
             </div>
                 <div class="chart-container">
-                    <canvas id="incomeChart" width="400" height="400"></canvas>
-                    <canvas id="incomeBarChart" width="400" height="200"></canvas>
+                    <canvas class="hidden income-container-item" id="incomeChart" width="400" height="400"></canvas>
+                    <canvas class="hidden income-container-item" id="incomeBarChart" width="400" height="200"></canvas>
                 </div>
                 <!-- income chart -->
             </div>
 
             <!-- <div class="page" id="budgetPage"> -->
-            <div class="budget-container hidden">
-                <div class="flexB">
+            <div class="budget-container">
+                <div class="flexB hidden budget-container-item">
                 <div class="info">
                     <div class="info-add-new">
                     <div class="income-info-add">
@@ -151,7 +151,7 @@
 
     
     <!-- income budget compare -->
-                <div class="detail-recents">
+                <div class="detail-recents hidden budget-container-item">
                     <div class="incomeBudgetCompare">
                         <table>
                             <tbody id="budgetChartTableBody">
@@ -170,16 +170,16 @@
             <!-- </div> -->
             
             <div class="chart-container">
-                <canvas id="budgetDoughnutChart" width="400" height="200"></canvas>
-                <canvas id="incomeVsBudgetChart" width="400" height="200"></canvas>
+                <canvas class="hidden budget-container-item" id="budgetDoughnutChart" width="400" height="200"></canvas>
+                <canvas class="hidden budget-container-item" id="incomeVsBudgetChart" width="400" height="200"></canvas>
             </div>
             </div>
             
         
                 
         <!-- expense container -->
-            <div class="expense-container hidden">
-                <div class="flexEx">
+            <div class="expense-container">
+                <div class="flexEx hidden expense-container-item">
                 <div class="info">
                     <div class="info-add-new">
                         <div class="income-info-add">
@@ -243,12 +243,16 @@
             </div>
         </div>
             <div class="chart-container">
-            <canvas id="expenseDoughnutChart" width="400" height="400"></canvas>
+            <canvas class="hidden expense-container-item" id="expenseDoughnutChart" width="400" height="400"></canvas>
+            <canvas class="hidden expense-container-item" id="expenseBarChart" width="400" height="200"></canvas>
             </div>
             </div>
 
-            <div class="summary-container hidden">
+            <div class="summary-container ">
             </div>
+            </div>
+            <div>
+                <a href="https://github.com/eliltaA/budget-tracker_javascript_project.git" target="_blank">Links About Me</a>
             </div>
         </div>
 
