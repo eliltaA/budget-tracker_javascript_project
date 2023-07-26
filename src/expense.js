@@ -1,13 +1,17 @@
 import Chart from 'chart.js/auto';
+import incomeObj from "./income.js";
+
 
 class Expense {
     constructor(){
+        this.expense = 0;
         this.expenses = [];
         this.expenseAddForm = document.getElementById("expenseAddForm")
         this.expenseAddForm.addEventListener("submit", this.addExpenseForm.bind(this));
         this.loadFromCookies();
         this.generateExpenseTable();
-        this.generateDoughnutChart()
+        this.generateDoughnutChart();
+        this.generateBarChart();
     }
 
     setCookie(name, value, daysToExpire) {
@@ -22,13 +26,13 @@ class Expense {
         const decodedCookie = decodeURIComponent(document.cookie);
         const cookieArray = decodedCookie.split(';');
         for (let i = 0; i < cookieArray.length; i++) {
-          let cookie = cookieArray[i];
-          while (cookie.charAt(0) === ' ') {
+        let cookie = cookieArray[i];
+        while (cookie.charAt(0) === ' ') {
             cookie = cookie.substring(1);
-          }
-          if (cookie.indexOf(cookieName) === 0) {
+        }
+        if (cookie.indexOf(cookieName) === 0) {
             return cookie.substring(cookieName.length, cookie.length);
-          }
+        }
         }
         return "";
     }
@@ -38,10 +42,15 @@ class Expense {
         if (expensesFromCookie) {
             this.expenses = JSON.parse(expensesFromCookie);
         }
+        const totalExpenseFromCookie = this.getCookie('expense');
+        if (totalExpenseFromCookie) {
+            this.expense = parseFloat(totalExpenseFromCookie);
+        }
     }
 
     saveToCookies() {
         this.setCookie('expenses', JSON.stringify(this.expenses), 7);
+        this.setCookie('expense', this.expense.toString(), 7);
     }
 
     addExpense(amount, categories) {
@@ -49,11 +58,12 @@ class Expense {
             amount: parseFloat(amount),
             categories: categories
         };
+        this.expense += parseFloat(amount);
         this.expenses.push(expenseDetails);
         this.saveToCookies();
         this.generateExpenseTable();
         this.generateDoughnutChart()
-        // this.generateExpenseChart();
+        this.generateBarChart();
     }
 
     addExpenseForm(e) {
@@ -62,7 +72,7 @@ class Expense {
         const existingExpenseInput = document.getElementById("existingExpenseTagInput").value;
         const newExpenseCategoryInput = document.getElementById("newExpenseCategory").value;
         const categories = existingExpenseInput || newExpenseCategoryInput
-       
+        
         if (existingExpenseInput.trim() === '' && newExpenseCategoryInput.trim() === ('')) {
             alert('Please enter a valid expense category.');
             return;
@@ -104,11 +114,6 @@ class Expense {
             tableBody.appendChild(newRow);
         });
     
-    }
-
-
-    getTotalExpenses() {
-        return this.expenses.reduce((total, expense) => total + expense.amount, 0);
     }
 
 
@@ -184,8 +189,69 @@ class Expense {
             })
         }
     }
-    
-    
+
+    generateBarChart() {
+        const ctx = document.getElementById("expenseBarChart").getContext("2d");
+
+        if (this.expenseBarChartInstance) {
+            this.expenseBarChartInstance.destroy();
+        }    
+        // Prepare the data for the bar chart
+        const labels = ["Expenses", "Budget", "Savings"];
+        const data = [this.expense, incomeObj.budget, incomeObj.savings];
+
+        // Create the bar chart
+        this.expenseBarChartInstance = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "Amount",
+                        data: data,
+                        backgroundColor: [
+                            "rgba(255, 99, 132, 0.6)",
+                            "rgba(54, 162, 235, 0.6)",
+                            "rgba(75, 192, 192, 0.6)",
+                        ],
+                        borderColor: [
+                            "rgba(255, 99, 132, 1)",
+                            "rgba(54, 162, 235, 1)",
+                            "rgba(75, 192, 192, 1)",
+                        ],
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Expenses vs. Budget vs. Savings",
+                        font: {
+                            size: 20,
+                            weight: 'bold',
+                            color: 'rgba(0, 0, 0, 1)',
+                        },
+                    },
+                    datalabels: {
+                        align: 'end',
+                        anchor: 'end',
+                        color: 'black',
+                        font: {
+                            weight: 'bold',
+                        },
+                    },
+                },
+            },
+        });
+    }
+
 
 
     initiate() {}

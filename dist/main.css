@@ -85,7 +85,6 @@ p {
   margin-top: 2rem;
   margin-left: 5rem;
   margin-right: 5rem;
-  margin-bottom: 3rem;
   gap: 250px;
 }
 
@@ -136,7 +135,7 @@ p {
   padding: 1.8rem 4rem;
 }
 
-/* Optionally, you can adjust the font size to fit the smaller box */
+/* adjust the font size to fit the smaller box */
 .detail-recents table td {
   font-size: 19px;
 }
@@ -227,8 +226,8 @@ select {
 }
 
 #budgetDoughnutChart {
-  height: 450px !important; /* Adjust the height as needed */
-  width: 480px !important; /* Adjust the width as needed */
+  height: 450px !important;
+  width: 480px !important;
   background-color: var(--white);
   border-radius: 20px;
 }
@@ -252,8 +251,8 @@ select {
 
 .all-expenses-div {
   display: flex;
-  height: 22rem;
-  width: 35rem;
+  height: 20rem;
+  width: 30rem;
   background-color: var(--white);
   border-radius: 20px;
   margin-top: 2rem;
@@ -262,9 +261,15 @@ select {
 }
 
 #expenseDoughnutChart {
-  display: flex;
-  height: 450px !important; /* Adjust the height as needed */
-  width: 480px !important; /* Adjust the width as needed */
+  height: 450px !important;
+  width: 480px !important;
+  background-color: var(--white);
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+
+#expenseBarChart {
+  height: 380px !important;
   background-color: var(--white);
   border-radius: 20px;
 }
@@ -323,5 +328,5 @@ select {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
