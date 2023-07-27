@@ -190,7 +190,6 @@ class Income {
                         callbacks: {
                             label: (context) => {
                                 const label = context.label || '';
-                                console.log(context.label)
                                 const value = context.parsed || 0;
                                 // console.log(context.parsed)
                                 // console.log(context)
