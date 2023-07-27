@@ -130,14 +130,14 @@ class Income {
         newRow.innerHTML = `
             <td>${income.source}</td>
             <td>$${income.amount}</td>
-          `;
+        `;
           tableBody.appendChild(newRow);
           this.incomeData.push(income.amount);
           this.incomeLabels.push(income.source);
         });
         this.updateDoughnutChart(this.incomeLabels, this.incomeData);
         this.updateBarChart(this.incomeLabels, this.incomeData)
-      }
+    }
     
       // Add this function to your class to call it when you add a new income
     updateIncomeTable() {
@@ -266,8 +266,8 @@ class Income {
         const amountInput = document.getElementById("budgetAmountInput").value;
     
         if (categoryInput.trim() === '' || amountInput.trim() === '' || isNaN(parseFloat(amountInput))) {
-          alert('Please enter a valid budget category and amount.');
-          return;
+        alert('Please enter a valid budget category and amount.');
+        return;
         }
         this.addBudgetEntry(categoryInput, amountInput);
         this.generateBudgetTable();

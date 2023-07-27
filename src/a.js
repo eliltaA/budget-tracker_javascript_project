@@ -71,6 +71,10 @@ class Tracker {
       const expenseBarCanvas = document.getElementById("expenseBarChart");
       expenseBarCanvas.classList.remove("hidden")
       expenseBarCanvas.classList.add("summary")
+
+      // const link = document.getElementById("link");
+      // link.classList.remove("hidden")
+      // link.classList.add("summary")
     }
 
   //   initiate() {

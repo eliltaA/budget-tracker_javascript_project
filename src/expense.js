@@ -50,7 +50,7 @@ class Expense {
 
     saveToCookies() {
         this.setCookie('expenses', JSON.stringify(this.expenses), 7);
-        this.setCookie('expense', this.expense.toString(), 7);
+        this.setCookie('expense', this.expense, 7);
     }
 
     addExpense(amount, categories) {

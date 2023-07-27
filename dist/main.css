@@ -332,30 +332,37 @@ select {
 }
 
 #incomeChart.summary {
-  position: absolute;
+  position: relative;
   height: 450px !important;
-  margin-top: 3rem !important;
-  border-radius: 20px;
+  width: 480px !important;
+  /*background-color: var(--white);*/
+  margin-top: 3.9rem !important;
 }
 
 #expenseDoughnutChart.summary {
-  position: absolute;
-  left: 50%;
+  position: relative;
+  height: 450px !important;
+  width: 480px !important;
+  bottom: 400px;
 }
 
 #incomeVsBudgetChart.summary {
-  position: absolute;
-  top: 700px;
+  position: relative;
+  bottom: 500px;
   left: 50%;
-  width: 500px !important;
   height: 380px !important;
-  margin-bottom: 3rem !important;
+  width: 500px !important;
 }
 
 #expenseBarChart.summary {
-  position: absolute;
-  top: 700px;
-  width: 500px !important;
+  position: relative;
+  bottom: 400px;
   height: 380px !important;
+  width: 500px !important;
   margin-bottom: 3rem !important;
+}
+
+#link.summary {
+  position: relative;
+  bottom: 400px;
 }
