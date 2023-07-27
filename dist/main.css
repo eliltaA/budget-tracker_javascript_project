@@ -361,8 +361,3 @@ select {
   width: 500px !important;
   margin-bottom: 3rem !important;
 }
-
-#link.summary {
-  position: relative;
-  bottom: 400px;
-}
