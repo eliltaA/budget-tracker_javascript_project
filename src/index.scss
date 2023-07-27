@@ -98,11 +98,11 @@
   }
   
   #incomeBarChart {
-    height: 380px !important;
+    height: 450px !important;
     // width: 30rem !important;
     background-color: var(--white);
     // height: 380px; 
-    // width: 490px !important;
+    width: 500px !important;
     border-radius: 20px;
   }
   
@@ -240,11 +240,11 @@
   }
 
   #incomeVsBudgetChart {
-    height: 380px !important;
+    height: 450px !important;
     //  width: 30rem !important;
      background-color: var(--white);
     // height: 200px;
-    // width: 400px;
+    width: 490px !important;
     // background-color: var(--white);
     border-radius: 20px;
   }
@@ -298,15 +298,15 @@
 
   #expenseDoughnutChart{
     height: 450px !important; 
-    width: 480px !important; 
+    width: 500px !important; 
     background-color: var(--white);
     border-radius: 20px;
     margin-bottom: 2rem;
   }
 
   #expenseBarChart{
-    height: 380px !important; 
-    // width: 500px !important; 
+    height: 450px !important; 
+    width: 500px !important; 
     background-color: var(--white);
     border-radius: 20px;
   }
@@ -383,7 +383,7 @@
     height: 450px !important;
     width: 480px !important;
     /*background-color: var(--white);*/
-    margin-top: 3.9rem !important;
+    margin-top: 3rem !important;
   }
 
   #expenseDoughnutChart.summary{
