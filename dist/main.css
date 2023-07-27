@@ -1,3 +1,366 @@
-:root{--darkSlateGray: #24273d;--torquoise: #3dc3d6;--tomato: #fe5460;--seaGreen: #41dd66;--silver: #c8c7cc;--gainsboro: #e1e0e4;--background: #f8f8fa;--white: #ffffff}body{font-family:"Jost",sans-serif;background-color:var(--gainsboro);color:var(--primary-color)}p{margin:0}.container{margin:24px;padding:24px}.header{display:flex}.header-headings{width:50%;display:flex;justify-content:flex-start;gap:30px}.header-profile{width:50%;display:flex;justify-content:flex-end;gap:10px}.info{margin-top:2rem;margin-left:5rem;display:flex}.income-container{gap:30px;align-items:flex-start}.income-info{display:flex;flex-direction:column;gap:30px}.flex{display:flex;flex:auto}.info-add-new,.income-details{display:flex;flex:1;height:20rem;width:30rem;background-color:var(--white);border-radius:20px;padding:2rem}.chart-container{display:flex;margin-top:2rem;margin-left:5rem;margin-right:5rem;gap:250px}#incomeChart{height:450px !important;width:480px !important;background-color:var(--white);margin-bottom:1rem !important;border-radius:20px}#incomeBarChart{height:380px !important;background-color:var(--white);border-radius:20px}.income-details{margin-top:2rem;margin-left:5rem;margin-right:5rem;display:flex;justify-content:space-around;overflow-y:scroll}.budget-table{display:flex;justify-content:space-around;height:20rem;width:30rem;background-color:var(--white);border-radius:20px;padding:1rem;overflow-y:scroll}.detail-recents{height:rem;width:25rem;background-color:var(--white);border-radius:20px;margin-left:4.5rem;margin-top:2rem}.detail-recents table td{padding:1rem 1rem}.detail-recents table td{font-size:19px}.add-btn,.forms input[type=submit]{background-color:var(--torquoise);border:none;height:35px;border-radius:6px;padding:10px;color:#fff;cursor:pointer}.add-btn:hover,.forms input[type=submit]:hover{background-color:#008b8b}.delete-btn{background-color:var(--tomato);border:none;border-radius:6px;padding:5px;color:#fff;cursor:pointer}.del-btn:hover{background-color:red}.active-tab{background-color:var(--tomato)}.active-tab:hover{background-color:brown}#incomeAddForm{display:flex;flex-direction:column;padding:10px}.forms{padding:10px 0 10px 0}input[type=text],input[type=number],select{min-height:20px;padding:5px;border:2px solid var(--torquoise);border-radius:6px;outline:none}.totalincome-value{display:flex;flex-direction:column}.totalincome-value table{max-width:80%;text-align:center}.incomeBudgetCompare table{width:80%;text-align:center}.budget-table table tr td:nth-child(2){text-transform:capitalize}.budget-table td{text-align:center}.flexB{display:flex;gap:200px}#budgetDoughnutChart{height:450px !important;width:480px !important;background-color:var(--white);border-radius:20px}#incomeVsBudgetChart{height:380px !important;background-color:var(--white);border-radius:20px}.expense-form-inputs{display:flex;gap:20px}.flexEx{display:flex;gap:200px}.all-expenses-div{display:flex;height:20rem;width:30rem;background-color:var(--white);border-radius:20px;margin-top:2rem;padding:1rem;flex-direction:column}#expenseDoughnutChart{height:450px !important;width:480px !important;background-color:var(--white);border-radius:20px;margin-bottom:2rem}#expenseBarChart{height:380px !important;background-color:var(--white);border-radius:20px}.exhaustionDiv,.innerexhaustionDiv{height:1.2rem;border-radius:8px;width:20rem}.exhaustionDiv{border:1px solid #000}.innerexhaustionDiv{background-color:var(--torquoise)}.all-expenses{overflow-y:scroll}.all-expenses table{width:95%;text-align:center}.detail-expense-recents,.detail-summary-category,.detail-summary-recents{height:35rem}.summary-info-add{width:100%;text-align:center}.summary-budget-table table{width:95%}.summary-summary{display:flex;flex-direction:column}.summary-saving{margin-top:3rem;display:flex;align-items:center;gap:30px}.summary-saving span{font-weight:700}.hidden{display:none !important}#incomeChart.summary{position:relative;height:450px !important;width:480px !important;margin-top:3.9rem !important}#expenseDoughnutChart.summary{position:relative;height:450px !important;width:480px !important;bottom:400px}#incomeVsBudgetChart.summary{position:relative;bottom:500px;left:50%;height:380px !important;width:500px !important}#expenseBarChart.summary{position:relative;bottom:400px;height:380px !important;width:500px !important;margin-bottom:3rem !important}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+:root {
+  --darkSlateGray: #24273d; /* sidebar */
+  --torquoise: #3dc3d6; /* nav bar */
+  --tomato: #fe5460; /* expense */
+  --seaGreen: #41dd66; /* income */
+  --silver: #c8c7cc; /* arrow */
+  --gainsboro: #e1e0e4; /* date */
+  --background: #f8f8fa; /* background */
+  --white: #ffffff; /* tablerow */
+}
 
-/*# sourceMappingURL=main.css.map*/
+body {
+  font-family: "Jost", sans-serif;
+  background-color: var(--gainsboro);
+  color: var(--primary-color);
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  margin: 24px;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+}
+
+.header-headings {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+.header-profile {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.info {
+  margin-top: 2rem;
+  margin-left: 5rem;
+  display: flex;
+  /* justify-content: space-around; */
+}
+
+.income-container {
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* Container for the income form and table */
+.income-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.flex {
+  display: flex;
+  flex: auto;
+}
+
+.info-add-new,
+.income-details {
+  display: flex;
+  flex: 1;
+  height: 20rem;
+  width: 30rem;
+  background-color: var(--white);
+  border-radius: 20px;
+  padding: 2rem;
+}
+
+.chart-container {
+  display: flex;
+  margin-top: 2rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  gap: 250px;
+}
+
+#incomeChart {
+  height: 450px !important;
+  width: 480px !important;
+  background-color: var(--white);
+  margin-bottom: 1rem !important;
+  border-radius: 20px;
+}
+
+#incomeBarChart {
+  height: 450px !important;
+  background-color: var(--white);
+  width: 500px !important;
+  border-radius: 20px;
+}
+
+.income-details {
+  margin-top: 2rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  display: flex;
+  justify-content: space-around;
+  overflow-y: scroll;
+}
+
+.budget-table {
+  display: flex;
+  justify-content: space-around;
+  height: 20rem;
+  width: 30rem;
+  background-color: var(--white);
+  border-radius: 20px;
+  padding: 1rem;
+  overflow-y: scroll;
+}
+
+.detail-recents {
+  height: rem;
+  width: 25rem;
+  background-color: var(--white);
+  border-radius: 20px;
+  margin-left: 4.5rem;
+  margin-top: 2rem;
+}
+
+.detail-recents table td {
+  padding: 1rem 1rem;
+}
+
+/* adjust the font size to fit the smaller box */
+.detail-recents table td {
+  font-size: 19px;
+}
+
+.add-btn,
+.forms input[type=submit] {
+  background-color: var(--torquoise);
+  border: none;
+  height: 35px;
+  border-radius: 6px;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.add-btn:hover,
+.forms input[type=submit]:hover {
+  background-color: darkcyan;
+}
+
+.delete-btn {
+  background-color: var(--tomato);
+  border: none;
+  border-radius: 6px;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.del-btn:hover {
+  background-color: red;
+}
+
+.active-tab {
+  background-color: var(--tomato);
+}
+
+.active-tab:hover {
+  background-color: brown;
+}
+
+#incomeAddForm {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.forms {
+  padding: 10px 0 10px 0;
+}
+
+input[type=text],
+input[type=number],
+select {
+  min-height: 20px;
+  padding: 5px;
+  border: 2px solid var(--torquoise);
+  border-radius: 6px;
+  outline: none;
+}
+
+.totalincome-value {
+  display: flex;
+  flex-direction: column;
+}
+
+.totalincome-value table {
+  max-width: 80%;
+  text-align: center;
+}
+
+.incomeBudgetCompare table {
+  width: 80%;
+  text-align: center;
+}
+
+.budget-table table tr td:nth-child(2) {
+  text-transform: capitalize;
+}
+
+.budget-table td {
+  text-align: center;
+}
+
+.flexB {
+  display: flex;
+  gap: 200px;
+}
+
+#budgetDoughnutChart {
+  height: 450px !important;
+  width: 480px !important;
+  background-color: var(--white);
+  border-radius: 20px;
+}
+
+#incomeVsBudgetChart {
+  height: 450px !important;
+  background-color: var(--white);
+  width: 490px !important;
+  border-radius: 20px;
+}
+
+/* EXpenses */
+.expense-form-inputs {
+  display: flex;
+  gap: 20px;
+}
+
+.flexEx {
+  display: flex;
+  gap: 200px;
+}
+
+.all-expenses-div {
+  display: flex;
+  height: 20rem;
+  width: 30rem;
+  background-color: var(--white);
+  border-radius: 20px;
+  margin-top: 2rem;
+  padding: 1rem;
+  flex-direction: column;
+}
+
+#expenseDoughnutChart {
+  height: 450px !important;
+  width: 500px !important;
+  background-color: var(--white);
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+
+#expenseBarChart {
+  height: 450px !important;
+  width: 500px !important;
+  background-color: var(--white);
+  border-radius: 20px;
+}
+
+.exhaustionDiv, .innerexhaustionDiv {
+  height: 1.2rem;
+  border-radius: 8px;
+  width: 20rem;
+}
+
+.exhaustionDiv {
+  border: 1px solid black;
+}
+
+.innerexhaustionDiv {
+  background-color: var(--torquoise);
+}
+
+.all-expenses {
+  overflow-y: scroll;
+}
+
+.all-expenses table {
+  width: 95%;
+  text-align: center;
+}
+
+.detail-expense-recents, .detail-summary-category, .detail-summary-recents {
+  height: 35rem;
+}
+
+/* summary */
+.summary-info-add {
+  width: 100%;
+  text-align: center;
+}
+
+.summary-budget-table table {
+  width: 95%;
+}
+
+.summary-summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-saving {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.summary-saving span {
+  font-weight: 700;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#incomeChart.summary {
+  position: relative;
+  height: 450px !important;
+  width: 480px !important;
+  /*background-color: var(--white);*/
+  margin-top: 3rem !important;
+}
+
+#expenseDoughnutChart.summary {
+  position: relative;
+  height: 450px !important;
+  width: 480px !important;
+  bottom: 400px;
+}
+
+#incomeVsBudgetChart.summary {
+  position: relative;
+  bottom: 500px;
+  left: 50%;
+  height: 380px !important;
+  width: 500px !important;
+}
+
+#expenseBarChart.summary {
+  position: relative;
+  bottom: 400px;
+  height: 380px !important;
+  width: 500px !important;
+  margin-bottom: 3rem !important;
+}
