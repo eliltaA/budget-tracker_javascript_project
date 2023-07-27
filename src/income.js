@@ -273,6 +273,8 @@ class Income {
         }
         this.addBudgetEntry(categoryInput, amountInput);
         this.generateBudgetTable();
+        document.getElementById("budgetCategoryInput").value = ""
+        document.getElementById("budgetAmountInput").value = ""
     }
 
     saveBudgetCategoriesToCookies() {
