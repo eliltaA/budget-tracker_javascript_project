@@ -49,15 +49,15 @@ class Income {
     loadFromCookies() {
         const incomeFromCookie = this.getCookie('income');
         const sourcesFromCookie = this.getCookie('sources');
-         const budgetFromCookie = this.getCookie('budget');
+        const budgetFromCookie = this.getCookie('budget');
         if (incomeFromCookie) {
-          this.income = parseFloat(incomeFromCookie);
+        this.income = parseFloat(incomeFromCookie);
         }
         if (sourcesFromCookie) {
             this.incomes = JSON.parse(sourcesFromCookie);
         }
         if (budgetFromCookie) {
-          this.budget = parseFloat(budgetFromCookie);
+        this.budget = parseFloat(budgetFromCookie);
         }
         this.updateSavings();
     }

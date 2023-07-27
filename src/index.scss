@@ -128,16 +128,18 @@
   }
   
   .detail-recents {
-    display: flex;
-    height: 10rem;
-    width: 20rem; 
+    // display: flex;
+    height: rem;
+    width: 25rem; 
     background-color: var(--white);
     border-radius: 20px;
-    padding: 1rem;
+    margin-left: 4.5rem;
+    margin-top: 2rem;
+    // padding: 1rem;
   }
 
   .detail-recents table td {
-    padding: 1.8rem 4rem;
+    padding: 1rem 1rem;
   }
   
   /* adjust the font size to fit the smaller box */
@@ -375,4 +377,35 @@
   .hidden {
     display: none !important;
   }
-  
+
+  #incomeChart.summary {
+    position: absolute;
+    height: 450px !important;
+    // width: 480px !important;
+    // background-color: var(--white);
+    margin-top: 3rem !important;
+    border-radius: 20px;
+  }
+
+  #expenseDoughnutChart.summary{
+    position: absolute;
+    left: 50%;
+  }
+
+  #incomeVsBudgetChart.summary{
+    position: absolute;
+    top: 700px;
+    left: 50%;
+    width: 500px !important;
+    height: 380px !important;
+    margin-bottom: 3rem !important;
+  }
+
+  #expenseBarChart.summary{
+    position: absolute;
+    top: 700px;
+    width: 500px !important;
+    height: 380px !important;
+    margin-bottom: 3rem !important;
+  }
+

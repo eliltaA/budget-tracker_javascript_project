@@ -34,12 +34,17 @@ class Tracker {
     const containerName = `${clickedTab.split('Btn')[0]}-container-item`;
     // console.log(containerName)
     this.tabDivs.forEach(div => {
+      div.classList.remove("summary")
       if (div.classList.contains(containerName)){
       // console.log(div.classList)
         return div.classList.remove('hidden');
       }else{
       div.classList.add('hidden');
   }});
+
+    if (e.target === this.summaryBtn){
+      this.displayChartsInSummary()
+    };
   
     this.tabBtns.forEach(btn => {
       if (btn.id === e.target.id) return btn.classList.add('active-tab');
@@ -53,15 +58,19 @@ class Tracker {
   
       const incomeChartCanvas = document.getElementById("incomeChart");
       incomeChartCanvas.classList.remove("hidden")
-
-      const budgetChartCanvas = document.getElementById("incomeVsBudgetChart");
-      budgetChartCanvas.classList.remove("hidden")
+      incomeChartCanvas.classList.add("summary")
 
       const expenseChartCanvas = document.getElementById("expenseDoughnutChart");
       expenseChartCanvas.classList.remove("hidden")
+      expenseChartCanvas.classList.add("summary")
+
+      const budgetChartCanvas = document.getElementById("incomeVsBudgetChart");
+      budgetChartCanvas.classList.remove("hidden")
+      budgetChartCanvas.classList.add("summary")
 
       const expenseBarCanvas = document.getElementById("expenseBarChart");
       expenseBarCanvas.classList.remove("hidden")
+      expenseBarCanvas.classList.add("summary")
     }
 
   //   initiate() {
