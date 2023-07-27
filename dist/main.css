@@ -364,3 +364,13 @@ select {
   width: 500px !important;
   margin-bottom: 3rem !important;
 }
+
+.link {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+}
+
+.link img {
+  height: 50px;
+}
