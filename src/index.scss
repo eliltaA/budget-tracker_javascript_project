@@ -242,7 +242,7 @@
   #incomeVsBudgetChart {
     height: 450px !important;
     //  width: 30rem !important;
-     background-color: var(--white);
+    background-color: var(--white);
     // height: 200px;
     width: 490px !important;
     // background-color: var(--white);
@@ -411,6 +411,15 @@
     margin-bottom: 3rem !important;
   }
 
+  .link{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+  }
+
+  .link img{
+    height: 50px;
+  }
   // #link.summary{
   //   position: relative;
   //   bottom: 400px;

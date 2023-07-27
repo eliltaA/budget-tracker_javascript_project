@@ -179,8 +179,8 @@ class Expense {
                             callbacks: {
                                 label: (context) => {
                                     const label = context.label || '';
-                                    const value = context.parsed.y || 0;
-                                    return label + ': $' + value.toFixed(2);
+                                    const value = context.parsed || 0;
+                                    return label + ': $' + value;
                                 },
                             },
                         },
@@ -196,11 +196,10 @@ class Expense {
         if (this.expenseBarChartInstance) {
             this.expenseBarChartInstance.destroy();
         }    
-        // Prepare the data for the bar chart
+        
         const labels = ["Expenses", "Budget", "Savings"];
         const data = [this.expense, incomeObj.budget, incomeObj.savings];
 
-        // Create the bar chart
         this.expenseBarChartInstance = new Chart(ctx, {
             type: "bar",
             data: {

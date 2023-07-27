@@ -6,7 +6,7 @@ class Income {
         this.incomes = [];
         this.budget = 0;
         this.savings = 0;
-        this.incomeCategories = this.getIncomeCategories();
+        // this.incomeCategories = this.getIncomeCategories();
         this.budgetCategories = [];
         this.budgetAddBtn = document.getElementById("budgetAddbtn")
         this.incomeAddForm = document.getElementById("incomeAddForm")
@@ -72,7 +72,7 @@ class Income {
       // Method to update the savings property based on income and budget
     updateSavings() {
         this.savings = this.income - this.budget;
-        document.getElementById('estimatedSavingsValue').textContent = this.savings.toFixed(2);
+        document.getElementById('estimatedSavingsValue').textContent = '$' + this.savings.toFixed(2);
     }
 
     addIncome(amount, source) {
@@ -109,13 +109,12 @@ class Income {
         document.getElementById("newIncomeSource").value = '';
         document.getElementById("existingIncomeSource").value = '';
         }
-        //  location.reload();
     }
 
-    getIncomeCategories() {
-        const incomeCategories = this.getCookie("sources");
-        return incomeCategories ? JSON.parse(incomeCategories) : [];
-    }
+    // getIncomeCategories() {
+    //     const incomeCategories = this.getCookie("sources");
+    //     return incomeCategories ? JSON.parse(incomeCategories) : [];
+    // }
 
     generateIncomeTable() {
         const tableBody = document.getElementById("incomeTableBody");
@@ -131,9 +130,9 @@ class Income {
             <td>${income.source}</td>
             <td>$${income.amount}</td>
         `;
-          tableBody.appendChild(newRow);
-          this.incomeData.push(income.amount);
-          this.incomeLabels.push(income.source);
+        tableBody.appendChild(newRow);
+        this.incomeData.push(income.amount);
+        this.incomeLabels.push(income.source);
         });
         this.updateDoughnutChart(this.incomeLabels, this.incomeData);
         this.updateBarChart(this.incomeLabels, this.incomeData)
@@ -144,21 +143,20 @@ class Income {
         this.generateIncomeTable();
     }  
 
-    updateDoughnutChart(incomeLabels, incomeData) {
+    updateDoughnutChart(labels, data) {
         const incomeChart = document.getElementById("incomeChart").getContext("2d");
-      
         if (this.incomeChartInstance) {
             // If the chart already exists, destroy it first
             this.incomeChartInstance.destroy();
         }
-    
+
         this.incomeChartInstance = new Chart(incomeChart, {
             type: "doughnut",
             data: {
-                labels: incomeLabels,
+                labels: labels,
                 datasets: [
                     {
-                        data: incomeData,
+                        data: data,
                         backgroundColor: [
                             'rgb(255, 99, 132, 0.7)',
                             'rgb(255, 159, 64, 0.7)',
@@ -174,6 +172,7 @@ class Income {
                 ],
             },
             options: {
+                responsive: true,
                 plugins: {
                     title: {
                         display: true,
@@ -191,8 +190,12 @@ class Income {
                         callbacks: {
                             label: (context) => {
                                 const label = context.label || '';
-                                const value = context.parsed.y || 0;
-                                return label + ': $' + value.toFixed(2);
+                                console.log(context.label)
+                                const value = context.parsed || 0;
+                                // console.log(context.parsed)
+                                // console.log(context)
+                                // console.log(value)
+                                return label + ': $' + value;
                             },
                         },
                     },
@@ -313,8 +316,7 @@ class Income {
             this.deleteBudgetEntry(index);
         });
         });
-    
-        document.getElementById('incomeBudgetValue').textContent = this.budget;
+        document.getElementById('incomeBudgetValue').textContent = '$' + this.budget.toFixed(2);
     }
     
     generateBarChart() {
@@ -424,8 +426,8 @@ class Income {
                         callbacks: {
                             label: (context) => {
                                 const label = context.label || '';
-                                const value = context.parsed.y || 0;
-                                return label + ': $' + value.toFixed(2);
+                                const value = context.parsed || 0;
+                                return label + ': $' + value;
                             },
                         },
                     },
@@ -437,7 +439,6 @@ class Income {
     
     initiate() {
         //document.getElementById('incomeValue').textContent = this.income;
-        document.getElementById('incomeBudgetValue').textContent = this.budget;
         document.getElementById("budgetAddForm").addEventListener("submit", this.addBudgetForm.bind(this));
         this.loadBudgetCategoriesFromCookies();
         this.updateBudgetTotal();
