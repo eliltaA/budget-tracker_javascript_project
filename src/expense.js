@@ -6,7 +6,6 @@ class Expense {
     constructor(){
         this.expense = 0;
         this.expenses = [];
-        console.log(this.expense)
         this.expenseAddForm = document.getElementById("expenseAddForm")
         this.expenseAddForm.addEventListener("submit", this.addExpenseForm.bind(this));
         this.loadFromCookies();
@@ -45,17 +44,22 @@ class Expense {
             this.expenses = JSON.parse(expensesFromCookie);
         }else{
             this.expenses = [{
-                amount: 100, 
-                categories: 'Sample Category', 
+                amount: 300, 
+                categories: 'Sample Category1', 
+                date: new Date().toLocaleDateString(),
+            },
+            {
+                amount: 200, 
+                categories: 'Sample Category2', 
                 date: new Date().toLocaleDateString(),
             }];
-            this.expense = 100;
+            this.expense = 500;
         }
         const totalExpenseFromCookie = this.getCookie('expense');
         if (totalExpenseFromCookie) {
             this.expense = parseFloat(totalExpenseFromCookie);
         }else{
-            this.expense = 100;
+            this.expense = 300;
         }
     }
 
@@ -72,7 +76,7 @@ class Expense {
         };
         if (this.expenses.length > 0 && this.expenses[0].categories === 'Sample Category') {
             this.expenses.shift(); 
-            this.expense -= 100; 
+            this.expense -= 300; 
         }
         this.expense += parseFloat(amount);
         this.expenses.push(expenseDetails);
@@ -134,9 +138,15 @@ class Expense {
         if (this.expenses.length === 0){
                 this.expenses = [{
                     amount: 100, 
-                    categories: 'Sample Category', 
+                    categories: 'Sample Category1', 
+                    date: new Date().toLocaleDateString(),
+                },
+                {
+                    amount: 200, 
+                    categories: 'Sample Category2', 
                     date: new Date().toLocaleDateString(),
                 }];
+                this.expense = 300
         }
         const reversedExpenses = this.expenses.slice().reverse();
         reversedExpenses.forEach((expense, index) => {
@@ -235,13 +245,14 @@ class Expense {
 
     generateBarChart() {
         const ctx = document.getElementById("expenseBarChart").getContext("2d");
-
+        // console.log(incomeObj.budget)
+        console.log(incomeObj.savings)
         if (this.expenseBarChartInstance) {
             this.expenseBarChartInstance.destroy();
         }    
         
         const labels = ["Expenses", "Budget", "Savings"];
-        if(this.expense === 0) this.expense = 100
+        if(this.expense === 0) this.expense = 300
         const data = [this.expense, incomeObj.budget, incomeObj.savings];
 
         this.expenseBarChartInstance = new Chart(ctx, {
