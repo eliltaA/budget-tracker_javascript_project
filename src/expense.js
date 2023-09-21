@@ -6,6 +6,7 @@ class Expense {
     constructor(){
         this.expense = 0;
         this.expenses = [];
+        console.log(this.expense)
         this.expenseAddForm = document.getElementById("expenseAddForm")
         this.expenseAddForm.addEventListener("submit", this.addExpenseForm.bind(this));
         this.loadFromCookies();
@@ -48,6 +49,7 @@ class Expense {
                 categories: 'Sample Category', 
                 date: new Date().toLocaleDateString(),
             }];
+            this.expense = 100;
         }
         const totalExpenseFromCookie = this.getCookie('expense');
         if (totalExpenseFromCookie) {
@@ -65,7 +67,8 @@ class Expense {
     addExpense(amount, categories) {
         const expenseDetails = {
             amount: parseFloat(amount),
-            categories: categories
+            categories: categories,
+            date: new Date().toLocaleDateString(),
         };
         if (this.expenses.length > 0 && this.expenses[0].categories === 'Sample Category') {
             this.expenses.shift(); 
@@ -112,10 +115,29 @@ class Expense {
     //       selectElement.appendChild(optionElement);
     //     });
     //   }
+    deleteExpenseEntry(index) {
+        if (index >= 0 && index < this.expenses.length) {
+            const reversedIndex = this.expenses.length - 1 - index;
+            const deletedExpense = this.expenses.splice(reversedIndex, 1)[0];
+            // this.expense -= deletedExpense.amount;
+            this.expense = this.expenses.reduce((total, expense) => total + expense.amount, 0);
+            this.saveToCookies();
+            this.generateExpenseTable();
+            this.generateDoughnutChart();
+            this.generateBarChart();
+        }
+    }
 
     generateExpenseTable() {
         const tableBody = document.getElementById("allExpensesBody");
         tableBody.innerHTML = "";
+        if (this.expenses.length === 0){
+                this.expenses = [{
+                    amount: 100, 
+                    categories: 'Sample Category', 
+                    date: new Date().toLocaleDateString(),
+                }];
+        }
         const reversedExpenses = this.expenses.slice().reverse();
         reversedExpenses.forEach((expense, index) => {
             const newRow = document.createElement("tr");
@@ -124,10 +146,17 @@ class Expense {
                 <td>${expense.date}</td>
                 <td>${expense.categories}</td>
                 <td>$${expense.amount}</td>
+                <td><button class="delete-btn" data-index="${index}">Delete</button></td>
             `;
             tableBody.appendChild(newRow);
         });
-    
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        deleteButtons.forEach((button) => {
+            button.addEventListener("click", (e) => {
+                const index = e.target.dataset.index;
+                this.deleteExpenseEntry(index);
+            });
+    });
     }
 
 
@@ -212,6 +241,7 @@ class Expense {
         }    
         
         const labels = ["Expenses", "Budget", "Savings"];
+        if(this.expense === 0) this.expense = 100
         const data = [this.expense, incomeObj.budget, incomeObj.savings];
 
         this.expenseBarChartInstance = new Chart(ctx, {
