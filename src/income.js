@@ -4,10 +4,12 @@ class Income {
     constructor(){
         this.income = 0;
         this.incomes = [];
-        const hasUserData = (this.income <= 0) ;
+        const hasUserData = this.income <= 0;
         // const hasBudget = this.budget <= 0
         if (hasUserData) {
             this.loadSampleData();
+        }else{ this.loadFromCookies();   
+            console.log(this.incomes)
         }
         this.budget = 0;
         this.savings = 0;
@@ -23,6 +25,8 @@ class Income {
         this.incomeData = []; // Initialize incomeData as an empty array
         this.incomeLabels = [];
         this.generateIncomeTable();
+        // console.log(this.incomes)
+        console.log('generateIncomeTable called');
         this.updateBudgetTotal();
         this.updateSavings();
         this.generateBudgetTable();
@@ -150,34 +154,55 @@ class Income {
     //     const incomeCategories = this.getCookie("sources");
     //     return incomeCategories ? JSON.parse(incomeCategories) : [];
     // }
+    deleteIncomeEntry(index) {
+        const reversedIndex = this.incomes.length - 1 - index; // Calculate the reversed index
+        if (reversedIndex >= 0 && reversedIndex < this.incomes.length) {
+            const deletedIncome = this.incomes.splice(reversedIndex, 1)[0];
+            this.income -= deletedIncome.amount;
+            this.updateSavings();
+            this.saveToCookies();
+            this.generateIncomeTable();
+            if (this.incomes.length === 0) {
+                            this.loadSampleData();
+                            this.generateIncomeTable()
+                        }
+        }
+    }
 
     generateIncomeTable() {
+        // console.log(this.incomes, "incomes");
         const tableBody = document.getElementById("incomeTableBody");
         tableBody.innerHTML = "";
         
-        this.incomeData = []; // Clear the incomeData array
+        this.incomeData = []; 
         this.incomeLabels = [];
-        // console.log(this.incomes, "incomes");
+        if (this.incomes.length === 0) {
+            this.loadSampleData();
+        }
         const reversedIncomes = this.incomes.slice().reverse();
-        reversedIncomes.forEach((income) => {
+        reversedIncomes.forEach((income, index) => {
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
             <td>${income.date}</td>
             <td>${income.source}</td>
             <td>$${income.amount}</td>
+            <td><button class="delete-btn" data-index="${index}">Delete</button></td>
         `;
         tableBody.appendChild(newRow);
         this.incomeData.push(income.amount);
         this.incomeLabels.push(income.source);
         });
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        deleteButtons.forEach((button) => {
+            button.addEventListener("click", (e) => {
+                const index = e.target.dataset.index;
+                this.deleteIncomeEntry(index);
+            });
+        });
+
         this.updateDoughnutChart(this.incomeLabels, this.incomeData);
         this.updateBarChart(this.incomeLabels, this.incomeData)
     }
-    
-      // Add this function to your class to call it when you add a new income
-    updateIncomeTable() {
-        this.generateIncomeTable();
-    }  
 
     updateDoughnutChart(labels, data) {
         const incomeChart = document.getElementById("incomeChart").getContext("2d");
@@ -494,6 +519,7 @@ class Income {
         this.loadBudgetCategoriesFromCookies();
         this.updateBudgetTotal();
         // this.generateBudgetTable();
+        // this.generateIncomeTable();
     }
     
 }
