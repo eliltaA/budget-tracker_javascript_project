@@ -71,13 +71,11 @@ p {
 
 .info-add-new,
 .income-details {
-  display: flex;
-  flex: 1;
   height: 20rem;
   width: 30rem;
   background-color: var(--white);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .chart-container {
@@ -98,29 +96,31 @@ p {
 
 #incomeBarChart {
   height: 450px !important;
+  width: 30rem !important;
   background-color: var(--white);
-  width: 500px !important;
   border-radius: 20px;
 }
 
 .income-details {
   margin-top: 2rem;
   margin-left: 12rem;
-  margin-right: 30rem;
   display: flex;
-  justify-content: space-around;
-  overflow-y: scroll;
+  flex-direction: column;
+}
+
+#budgetAddForm {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 
 .budget-table {
-  display: flex;
-  justify-content: space-around;
+  margin-top: 2rem;
   height: 20rem;
   width: 30rem;
   background-color: var(--white);
   border-radius: 20px;
   padding: 1rem;
-  overflow-y: scroll;
 }
 
 .detail-recents {
@@ -201,10 +201,11 @@ select {
 .totalincome-value {
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .totalincome-value table {
-  max-width: 80%;
+  width: 90%;
   text-align: center;
 }
 
