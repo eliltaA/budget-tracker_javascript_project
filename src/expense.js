@@ -14,6 +14,7 @@ class Expense {
         this.generateBarChart();
     }
 
+
     setCookie(name, value, daysToExpire) {
         const date = new Date();
         date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
@@ -41,10 +42,18 @@ class Expense {
         const expensesFromCookie = this.getCookie('expenses');
         if (expensesFromCookie) {
             this.expenses = JSON.parse(expensesFromCookie);
+        }else{
+            this.expenses = [{
+                amount: 100, 
+                categories: 'Sample Category', 
+                date: new Date().toLocaleDateString(),
+            }];
         }
         const totalExpenseFromCookie = this.getCookie('expense');
         if (totalExpenseFromCookie) {
             this.expense = parseFloat(totalExpenseFromCookie);
+        }else{
+            this.expense = 100;
         }
     }
 
@@ -58,6 +67,10 @@ class Expense {
             amount: parseFloat(amount),
             categories: categories
         };
+        if (this.expenses.length > 0 && this.expenses[0].categories === 'Sample Category') {
+            this.expenses.shift(); 
+            this.expense -= 100; 
+        }
         this.expense += parseFloat(amount);
         this.expenses.push(expenseDetails);
         this.saveToCookies();
@@ -108,6 +121,7 @@ class Expense {
             const newRow = document.createElement("tr");
             newRow.innerHTML = `
                 <td>${index + 1}</td>
+                <td>${expense.date}</td>
                 <td>${expense.categories}</td>
                 <td>$${expense.amount}</td>
             `;

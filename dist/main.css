@@ -105,8 +105,8 @@ p {
 
 .income-details {
   margin-top: 2rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin-left: 12rem;
+  margin-right: 30rem;
   display: flex;
   justify-content: space-around;
   overflow-y: scroll;
@@ -352,7 +352,7 @@ select {
 #incomeVsBudgetChart.summary {
   position: relative;
   bottom: 500px;
-  left: 50%;
+  left: 36.8%;
   height: 380px !important;
   width: 500px !important;
 }
