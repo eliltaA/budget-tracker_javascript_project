@@ -5,12 +5,9 @@ class Income {
         this.income = 0;
         this.incomes = [];
         const hasUserData = this.income <= 0;
-        // const hasBudget = this.budget <= 0
         if (hasUserData) {
             this.loadSampleData();
-        }else{ this.loadFromCookies();   
-            console.log(this.incomes)
-        }
+        }else{ this.loadFromCookies();}
         this.budget = 0;
         this.savings = 0;
         this.budgetCategories = [];
@@ -22,18 +19,34 @@ class Income {
         this.incomeAddForm = document.getElementById("incomeAddForm")
         this.incomeAddForm.addEventListener("submit", this.addIncomeForm.bind(this))
         this.loadFromCookies();
-        this.incomeData = []; // Initialize incomeData as an empty array
+        this.incomeData = []; 
         this.incomeLabels = [];
+        this.preprocessIncomeData = this.preprocessIncomeData.bind(this);
         this.generateIncomeTable();
-        // console.log(this.incomes)
-        console.log('generateIncomeTable called');
         this.updateBudgetTotal();
         this.updateSavings();
         this.generateBudgetTable();
         this.generateBarChart();
-        this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
+        const preprocessedBudgetData = this.preprocessBudgetData(this.budgetCategories);
+        this.updateBudgetDoughnutChart(preprocessedBudgetData.labels, preprocessedBudgetData.data);
     }
 
+    preprocessIncomeData(incomes) {
+        const sourceMap = new Map();
+    
+        for (const income of incomes) {
+            if (sourceMap.has(income.source)) {
+                sourceMap.set(income.source, sourceMap.get(income.source) + income.amount);
+            } else {
+                sourceMap.set(income.source, income.amount);
+            }
+        }
+    
+        const sourceLabels = [...sourceMap.keys()];
+        const sourceData = [...sourceMap.values()];
+    
+        return { labels: sourceLabels, data: sourceData };
+    }
     loadSampleData() {
         this.incomes = [
             { amount: 1000, source: 'sample: Job', date: new Date().toLocaleDateString(), },
@@ -143,6 +156,7 @@ class Income {
             this.updateSavings();
             this.saveToCookies();
             this.generateIncomeTable();
+            this.generateBarChart();
 
         document.getElementById("newIncomeInput").value = '';
         document.getElementById("newIncomeSource").value = '';
@@ -199,10 +213,13 @@ class Income {
                 this.deleteIncomeEntry(index);
             });
         });
-
-        this.updateDoughnutChart(this.incomeLabels, this.incomeData);
-        this.updateBarChart(this.incomeLabels, this.incomeData)
+        const preprocessed = this.preprocessIncomeData(this.incomes);
+        this.updateDoughnutChart(preprocessed.labels, preprocessed.data);
+        // this.updateDoughnutChart(this.incomeLabels, this.incomeData);
+        this.updateBarChart(preprocessed.labels, preprocessed.data)
     }
+
+   
 
     updateDoughnutChart(labels, data) {
         const incomeChart = document.getElementById("incomeChart").getContext("2d");
@@ -307,6 +324,23 @@ class Income {
         }
     }
 
+    preprocessBudgetData(budgetCategories) {
+        const categoryMap = new Map();
+
+        for (const category of budgetCategories) {
+            if (categoryMap.has(category.category)) {
+                categoryMap.set(category.category, categoryMap.get(category.category) + category.amount);
+            } else {
+                categoryMap.set(category.category, category.amount);
+            }
+        }
+
+        const categoryLabels = [...categoryMap.keys()];
+        const categoryData = [...categoryMap.values()];
+
+        return { labels: categoryLabels, data: categoryData };
+    }
+
     addBudgetEntry(category, amount) {
         // Create an object representing the budget entry
         const budgetEntry = {
@@ -322,18 +356,19 @@ class Income {
         // Regenerate the budget table
         this.generateBudgetTable();
         this.generateBarChart();
-        this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
-        // if (this.budgetCategories.length > 2) {
-        //     this.clearSampleBudgetData();
-        // }
+        const preprocessedBudgetData = this.preprocessBudgetData(this.budgetCategories);
+        this.updateBudgetDoughnutChart(preprocessedBudgetData.labels, preprocessedBudgetData.data);
+        if (this.budgetCategories.length > 2) {
+            this.clearSampleBudgetData();
+        }
     }
-    // clearSampleBudgetData() {
-    //     this.budgetCategories = this.budgetCategories.filter((category) => {
-    //         return category.category !== 'sample Housing' && category.category !== 'sample Food' ;
-    //     });
-    //     this.budget = this.budgetCategories.reduce((total, category) => total + category.amount, 0);
-    //     this.updateSavings();
-    // }
+    clearSampleBudgetData() {
+        this.budgetCategories = this.budgetCategories.filter((category) => {
+            return category.category !== 'sample Housing' && category.category !== 'sample Food' ;
+        });
+        this.budget = this.budgetCategories.reduce((total, category) => total + category.amount, 0);
+        this.updateSavings();
+    }
 
 
     addBudgetForm(e) {
@@ -356,8 +391,9 @@ class Income {
     }
 
     updateBudgetTotal() {
-        const totalBudget = this.budgetCategories.reduce((total, entry) => total + parseFloat(entry.amount), 0);
+        const totalBudget = this.budgetCategories.reduce((total, entry) => total + parseFloat(entry.amount), 0) ;
         this.budget = totalBudget;
+        console.log(this.budget)
     }
     
     deleteBudgetEntry(index) {
@@ -367,14 +403,18 @@ class Income {
         this.saveBudgetCategoriesToCookies();
         this.generateBudgetTable();
         this.generateBarChart();
-        this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
+        const preprocessedBudgetData = this.preprocessBudgetData(this.budgetCategories);
+        this.updateBudgetDoughnutChart(preprocessedBudgetData.labels, preprocessedBudgetData.data);
     }
     
     
     generateBudgetTable() {
         const tableBody = document.getElementById("incomeBudgetTableBody");
         tableBody.innerHTML = "";
-    
+
+        if(this.budgetCategories.length === 0){
+            this.loadSampleBudgetData();
+        }
         this.budgetCategories.forEach((entry, index) => {
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
@@ -397,7 +437,7 @@ class Income {
     
     generateBarChart() {
         const incomeVsBudgetChart = document.getElementById("incomeVsBudgetChart").getContext("2d");
-
+        // console.log(this.income)
         if (this.incomeVsBudgetChartInstance) {
             // If the chart already exists, destroy it first
             this.incomeVsBudgetChartInstance.destroy();
@@ -517,9 +557,6 @@ class Income {
         //document.getElementById('incomeValue').textContent = this.income;
         document.getElementById("budgetAddForm").addEventListener("submit", this.addBudgetForm.bind(this));
         this.loadBudgetCategoriesFromCookies();
-        this.updateBudgetTotal();
-        // this.generateBudgetTable();
-        // this.generateIncomeTable();
     }
     
 }
