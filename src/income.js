@@ -4,10 +4,18 @@ class Income {
     constructor(){
         this.income = 0;
         this.incomes = [];
+        const hasUserData = (this.income <= 0) ;
+        // const hasBudget = this.budget <= 0
+        if (hasUserData) {
+            this.loadSampleData();
+        }
         this.budget = 0;
         this.savings = 0;
-        // this.incomeCategories = this.getIncomeCategories();
         this.budgetCategories = [];
+        this.loadBudgetCategoriesFromCookies();
+        if (this.budgetCategories.length === 0) {
+            this.loadSampleBudgetData();
+        }
         this.budgetAddBtn = document.getElementById("budgetAddbtn")
         this.incomeAddForm = document.getElementById("incomeAddForm")
         this.incomeAddForm.addEventListener("submit", this.addIncomeForm.bind(this))
@@ -15,12 +23,29 @@ class Income {
         this.incomeData = []; // Initialize incomeData as an empty array
         this.incomeLabels = [];
         this.generateIncomeTable();
-        this.loadBudgetCategoriesFromCookies();
         this.updateBudgetTotal();
         this.updateSavings();
         this.generateBudgetTable();
         this.generateBarChart();
         this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
+    }
+
+    loadSampleData() {
+        this.incomes = [
+            { amount: 1000, source: 'sample: Job', date: new Date().toLocaleDateString(), },
+            { amount: 200, source: 'sample: Freelance', date: new Date().toLocaleDateString(), }
+            // Add more sample entries as needed
+        ];
+        this.income = 1200
+    }
+
+    loadSampleBudgetData() {
+        this.budgetCategories = [
+            { category: 'sample: Housing', amount: 800, date: new Date().toLocaleDateString(), },
+            { category: 'sample: Food', amount: 300, date: new Date().toLocaleDateString(), },
+        ];
+        this.budget = 1100;
+        // this.budget = this.budgetCategories.reduce((total, category) => total + category.amount, 0);
     }
 
     setCookie(name, value, daysToExpire) {
@@ -64,9 +89,9 @@ class Income {
     
       // Save income and budget to cookies
     saveToCookies() {
-        this.setCookie('income', this.income, 7); 
+        this.setCookie("income", this.income, 7); 
         this.setCookie("sources", JSON.stringify(this.incomes.map((income) => income)), 7)
-        this.setCookie('budget', this.budget, 7); 
+        this.setCookie("budget", this.budget, 7); 
     }
 
       // Method to update the savings property based on income and budget
@@ -80,12 +105,22 @@ class Income {
         const incomeDetails = {
             amount: parseFloat(amount),
             source: source,
+            date: new Date().toLocaleDateString(),
         };
         // console.log(incomeDetails)
         this.income += parseFloat(amount)
         // Add the income details to the incomes array
         // this.incomeCategories.push(source)
         this.incomes.push(incomeDetails);
+        if (this.incomes.length > 2) {
+            this.clearSampleData();
+        }
+    }
+    clearSampleData() {
+        this.incomes = this.incomes.filter((income) => {
+            return income.source !== 'sample: Job' && income.source !== 'sample: Freelance';
+        });
+        this.income = this.incomes.reduce((total, income) => total + income.amount, 0);
     }
     
     addIncomeForm(e){
@@ -127,6 +162,7 @@ class Income {
         reversedIncomes.forEach((income) => {
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
+            <td>${income.date}</td>
             <td>${income.source}</td>
             <td>$${income.amount}</td>
         `;
@@ -238,8 +274,11 @@ class Income {
         const budgetCategoriesFromCookie = this.getCookie('budgetCategories');
         if (budgetCategoriesFromCookie) {
             this.budgetCategories = JSON.parse(budgetCategoriesFromCookie);
-        } else {
-            this.budgetCategories = [];
+        } else{
+            this.budgetCategories  = [
+                { category: 'sample Housing', amount: 800, date: new Date().toLocaleDateString(), },
+                { category: 'sample Food', amount: 300, date: new Date().toLocaleDateString(), },
+            ];
         }
     }
 
@@ -248,19 +287,29 @@ class Income {
         const budgetEntry = {
             category: category,
             amount: parseFloat(amount),
+            date: new Date().toLocaleDateString(),
         };
         // Add the budget entry to the budgetCategories array
         this.budgetCategories.push(budgetEntry);
-        // Update the budget total
         this.updateBudgetTotal();
         this.updateSavings();
-        // Save the budget categories to cookies
         this.saveBudgetCategoriesToCookies();
         // Regenerate the budget table
         this.generateBudgetTable();
         this.generateBarChart();
         this.updateBudgetDoughnutChart(this.budgetCategories.map((entry) => entry.category), this.budgetCategories.map((entry) => entry.amount));
+        // if (this.budgetCategories.length > 2) {
+        //     this.clearSampleBudgetData();
+        // }
     }
+    // clearSampleBudgetData() {
+    //     this.budgetCategories = this.budgetCategories.filter((category) => {
+    //         return category.category !== 'sample Housing' && category.category !== 'sample Food' ;
+    //     });
+    //     this.budget = this.budgetCategories.reduce((total, category) => total + category.amount, 0);
+    //     this.updateSavings();
+    // }
+
 
     addBudgetForm(e) {
         e.preventDefault();
@@ -304,6 +353,7 @@ class Income {
         this.budgetCategories.forEach((entry, index) => {
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
+            <td>${entry.date}</td>
             <td>${entry.category}</td>
             <td>$${entry.amount}</td>
             <td><button class="delete-btn" data-index="${index}">Delete</button></td>
@@ -443,7 +493,7 @@ class Income {
         document.getElementById("budgetAddForm").addEventListener("submit", this.addBudgetForm.bind(this));
         this.loadBudgetCategoriesFromCookies();
         this.updateBudgetTotal();
-        this.generateBudgetTable();
+        // this.generateBudgetTable();
     }
     
 }
