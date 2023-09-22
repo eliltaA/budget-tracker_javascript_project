@@ -69,15 +69,16 @@ p {
   flex: auto;
 }
 
-.info-add-new,
-.income-details {
-  display: flex;
-  flex: 1;
+.info-add-new {
   height: 20rem;
   width: 30rem;
+}
+
+.info-add-new,
+.income-details {
   background-color: var(--white);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .chart-container {
@@ -97,30 +98,37 @@ p {
 }
 
 #incomeBarChart {
-  height: 450px !important;
+  max-width: 40%; /* Ensure the chart doesn't exceed its container's width */
+  height: 450px !important; /* Let the height adjust proportionally based on the width */
   background-color: var(--white);
-  width: 500px !important;
-  border-radius: 20px;
+  display: block; /* Remove any default inline styling that may affect the chart */
+  margin: 0 auto; /* Center the chart horizontally in its container */
+  margin-right: 50%;
+  border-radius: 10px; /* Apply rounded corners to the chart */
 }
 
 .income-details {
+  height: 20rem;
+  width: 30rem;
   margin-top: 2rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin-left: 12rem;
   display: flex;
-  justify-content: space-around;
-  overflow-y: scroll;
+  flex-direction: column;
+}
+
+#budgetAddForm {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 
 .budget-table {
-  display: flex;
-  justify-content: space-around;
+  margin-top: 2rem;
   height: 20rem;
   width: 30rem;
   background-color: var(--white);
   border-radius: 20px;
   padding: 1rem;
-  overflow-y: scroll;
 }
 
 .detail-recents {
@@ -201,10 +209,11 @@ select {
 .totalincome-value {
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .totalincome-value table {
-  max-width: 80%;
+  width: 90%;
   text-align: center;
 }
 
@@ -234,10 +243,13 @@ select {
 }
 
 #incomeVsBudgetChart {
+  max-width: 40%;
   height: 450px !important;
   background-color: var(--white);
-  width: 490px !important;
-  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+  margin-right: 50%;
+  border-radius: 10px;
 }
 
 /* EXpenses */
@@ -271,10 +283,13 @@ select {
 }
 
 #expenseBarChart {
-  height: 450px !important;
-  width: 500px !important;
+  max-width: 40%; /* Ensure the chart doesn't exceed its container's width */
+  height: 450px !important; /* Let the height adjust proportionally based on the width */
   background-color: var(--white);
-  border-radius: 20px;
+  display: block; /* Remove any default inline styling that may affect the chart */
+  margin: 0 auto; /* Center the chart horizontally in its container */
+  margin-right: 50%;
+  border-radius: 10px; /* Apply rounded corners to the chart */
 }
 
 .exhaustionDiv, .innerexhaustionDiv {
@@ -335,34 +350,29 @@ select {
 }
 
 #incomeChart.summary {
-  position: relative;
   height: 450px !important;
   width: 480px !important;
-  /*background-color: var(--white);*/
-  margin-top: 3rem !important;
+  top: 5;
+  margin-left: 3%;
+  margin-top: 4rem !important;
 }
 
 #expenseDoughnutChart.summary {
   position: relative;
-  height: 450px !important;
-  width: 480px !important;
-  bottom: 400px;
+  left: 53%;
+  bottom: 1030px;
 }
 
 #incomeVsBudgetChart.summary {
-  position: relative;
-  bottom: 500px;
-  left: 50%;
-  height: 380px !important;
-  width: 500px !important;
+  margin-left: 1%;
+  margin-bottom: 3rem !important;
 }
 
 #expenseBarChart.summary {
   position: relative;
-  bottom: 400px;
-  height: 380px !important;
-  width: 500px !important;
-  margin-bottom: 3rem !important;
+  left: 6%;
+  bottom: 525px;
+  margin-bottom: 0rem !important;
 }
 
 .link {

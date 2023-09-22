@@ -65,10 +65,12 @@
                 </div>
             </div>
                 <div class="income-details">
+                    <h2>Income Records</h2>
                 <div class="totalincome-value">
                     <table>
                         <thead>
                         <tr>
+                            <th>Date</th>
                             <th>Source</th>
                             <th>Amount</th>
                         </tr>
@@ -81,7 +83,7 @@
             </div>
                 <div class="chart-container">
                     <canvas class="hidden income-container-item" id="incomeChart" width="400" height="400"></canvas>
-                    <canvas class="hidden income-container-item" id="incomeBarChart" width="400" height="200"></canvas>
+                    <canvas class="hidden income-container-item" id="incomeBarChart" ></canvas>
                 </div>
                 <!-- income chart -->
             </div>
@@ -123,10 +125,12 @@
     <div class="info-summary">
         <div class="income-info-summary">
     <div class="income-budget-summary">
-        <h3>Budget Table</h3>
         <div class="budget-table">
+            <h2>Budget Table</h2>
+            <div class="all-expenses">
             <table id="budgetTable">
                 <thead>
+                    <th>Date</th>
                     <th>Category</th>
                     <th>Amount</th>
                     <th>Action</th>
@@ -143,6 +147,7 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
         </div>
     </div>
 </div>
@@ -203,7 +208,7 @@
                                         >
                                     </div>
                                     <div class="forms">
-                                        <label for="">Tag:</label>
+                                        <label for="">Categories:</label>
                                         <select name="" id="existingExpenseTagInput">
                                             <option value="" >Select</option>
                                             <option value="miscellaneous">miscellaneous</option>
@@ -232,7 +237,8 @@
                     <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Tag</th>
+                        <th>Date</th>
+                        <th>Catogory</th>
                         <th>Amount</th>
                     </tr>
                     </thead>

@@ -14,6 +14,7 @@ class Expense {
         this.generateBarChart();
     }
 
+
     setCookie(name, value, daysToExpire) {
         const date = new Date();
         date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
@@ -41,10 +42,24 @@ class Expense {
         const expensesFromCookie = this.getCookie('expenses');
         if (expensesFromCookie) {
             this.expenses = JSON.parse(expensesFromCookie);
+        }else{
+            this.expenses = [{
+                amount: 300, 
+                categories: 'Sample Category1', 
+                date: new Date().toLocaleDateString(),
+            },
+            {
+                amount: 200, 
+                categories: 'Sample Category2', 
+                date: new Date().toLocaleDateString(),
+            }];
+            this.expense = 500;
         }
         const totalExpenseFromCookie = this.getCookie('expense');
         if (totalExpenseFromCookie) {
             this.expense = parseFloat(totalExpenseFromCookie);
+        }else{
+            this.expense = 300;
         }
     }
 
@@ -56,8 +71,13 @@ class Expense {
     addExpense(amount, categories) {
         const expenseDetails = {
             amount: parseFloat(amount),
-            categories: categories
+            categories: categories,
+            date: new Date().toLocaleDateString(),
         };
+        if (this.expenses.length > 0 && this.expenses[0].categories === 'Sample Category') {
+            this.expenses.shift(); 
+            this.expense -= 300; 
+        }
         this.expense += parseFloat(amount);
         this.expenses.push(expenseDetails);
         this.saveToCookies();
@@ -99,21 +119,54 @@ class Expense {
     //       selectElement.appendChild(optionElement);
     //     });
     //   }
+    deleteExpenseEntry(index) {
+        if (index >= 0 && index < this.expenses.length) {
+            const reversedIndex = this.expenses.length - 1 - index;
+            const deletedExpense = this.expenses.splice(reversedIndex, 1)[0];
+            // this.expense -= deletedExpense.amount;
+            this.expense = this.expenses.reduce((total, expense) => total + expense.amount, 0);
+            this.saveToCookies();
+            this.generateExpenseTable();
+            this.generateDoughnutChart();
+            this.generateBarChart();
+        }
+    }
 
     generateExpenseTable() {
         const tableBody = document.getElementById("allExpensesBody");
         tableBody.innerHTML = "";
+        if (this.expenses.length === 0){
+                this.expenses = [{
+                    amount: 100, 
+                    categories: 'Sample Category1', 
+                    date: new Date().toLocaleDateString(),
+                },
+                {
+                    amount: 200, 
+                    categories: 'Sample Category2', 
+                    date: new Date().toLocaleDateString(),
+                }];
+                this.expense = 300
+        }
         const reversedExpenses = this.expenses.slice().reverse();
         reversedExpenses.forEach((expense, index) => {
             const newRow = document.createElement("tr");
             newRow.innerHTML = `
                 <td>${index + 1}</td>
+                <td>${expense.date}</td>
                 <td>${expense.categories}</td>
                 <td>$${expense.amount}</td>
+                <td><button class="delete-btn" data-index="${index}">Delete</button></td>
             `;
             tableBody.appendChild(newRow);
         });
-    
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        deleteButtons.forEach((button) => {
+            button.addEventListener("click", (e) => {
+                const index = e.target.dataset.index;
+                this.deleteExpenseEntry(index);
+            });
+    });
     }
 
 
@@ -192,12 +245,14 @@ class Expense {
 
     generateBarChart() {
         const ctx = document.getElementById("expenseBarChart").getContext("2d");
-
+        // console.log(incomeObj.budget)
+        console.log(incomeObj.savings)
         if (this.expenseBarChartInstance) {
             this.expenseBarChartInstance.destroy();
         }    
         
         const labels = ["Expenses", "Budget", "Savings"];
+        if(this.expense === 0) this.expense = 300
         const data = [this.expense, incomeObj.budget, incomeObj.savings];
 
         this.expenseBarChartInstance = new Chart(ctx, {
