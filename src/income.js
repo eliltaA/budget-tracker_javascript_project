@@ -215,11 +215,8 @@ class Income {
         });
         const preprocessed = this.preprocessIncomeData(this.incomes);
         this.updateDoughnutChart(preprocessed.labels, preprocessed.data);
-        // this.updateDoughnutChart(this.incomeLabels, this.incomeData);
-        this.updateBarChart(preprocessed.labels, preprocessed.data)
+        this.updateBarChart(this.incomeLabels, this.incomeData)
     }
-
-   
 
     updateDoughnutChart(labels, data) {
         const incomeChart = document.getElementById("incomeChart").getContext("2d");
@@ -269,11 +266,14 @@ class Income {
                             label: (context) => {
                                 const label = context.label || '';
                                 const value = context.parsed || 0;
-                                // console.log(context.parsed)
-                                // console.log(context)
-                                // console.log(value)
                                 return label + ': $' + value;
                             },
+                        },
+                        titleFont: {
+                            size: 14,
+                        },
+                        bodyFont: {
+                            size: 14,
                         },
                     },
                 },
@@ -281,6 +281,7 @@ class Income {
         });
     }
     updateBarChart(labels, data) {
+        // console.log(data)
         const incomeBarChart = document.getElementById("incomeBarChart").getContext("2d");
 
         if (this.incomeBarChartInstance) {
@@ -294,10 +295,20 @@ class Income {
                 labels: labels,
                 datasets: [
                     {
-                        label: "Income Amount",
+                        label: labels,
                         data: data,
-                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: [
+                            'rgb(255, 99, 132, 0.7)',
+                            'rgb(255, 159, 64, 0.7)',
+                            'rgb(255, 205, 86, 0.8)',
+                            'rgb(75, 192, 192, 0.7)',
+                            'rgb(54, 162, 235, 0.7)',
+                            'rgb(1, 142, 203, 0.7)',
+                            'rgb(106, 144, 204, 0.7)',
+                            'rgb(1, 142, 203, 0.7)',
+                            'rgb(102, 55, 221, 0.8)',
+                        ],
+                        // borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 1,
                     },
                 ],
@@ -308,9 +319,38 @@ class Income {
                         beginAtZero: true,
                     },
                 },
+                plugins: {
+                    title: {
+                        display: true,
+                        font: {
+                            size: 16, 
+                        },
+                    },
+                    legend: {
+                        display: false, 
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                // console.log(value.y)
+                                return label + ': $' + value.y;
+                            },
+                        },
+                        titleFont: {
+                            size: 14, 
+                        },
+                        bodyFont: {
+                            size: 14, 
+                        },
+                    },
+                },
             },
         });
     }
+
+    
 
     loadBudgetCategoriesFromCookies() {
         const budgetCategoriesFromCookie = this.getCookie('budgetCategories');
