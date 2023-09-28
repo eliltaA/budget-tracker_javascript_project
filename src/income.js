@@ -132,6 +132,7 @@ class Income {
         if (this.incomes.length > 2) {
             this.clearSampleData();
         }
+        this.updateSavings();
     }
     clearSampleData() {
         this.incomes = this.incomes.filter((income) => {
@@ -179,6 +180,7 @@ class Income {
             if (this.incomes.length === 0) {
                             this.loadSampleData();
                             this.generateIncomeTable()
+                            this.updateSavings();
                         }
         }
     }
@@ -192,6 +194,7 @@ class Income {
         this.incomeLabels = [];
         if (this.incomes.length === 0) {
             this.loadSampleData();
+            this.updateSavings();
         }
         const reversedIncomes = this.incomes.slice().reverse();
         reversedIncomes.forEach((income, index) => {
@@ -422,6 +425,7 @@ class Income {
         }
         this.addBudgetEntry(categoryInput, amountInput);
         this.generateBudgetTable();
+        this.updateSavings();
         document.getElementById("budgetCategoryInput").value = ""
         document.getElementById("budgetAmountInput").value = ""
     }
