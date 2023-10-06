@@ -437,7 +437,7 @@ class Income {
     updateBudgetTotal() {
         const totalBudget = this.budgetCategories.reduce((total, entry) => total + parseFloat(entry.amount), 0) ;
         this.budget = totalBudget;
-        console.log(this.budget)
+        // console.log(this.budget)
     }
     
     deleteBudgetEntry(index) {
