@@ -1,40 +1,24 @@
 # budget-tracker_javascript_project
 The budget tracker is a web-based application designed to help users track and manage their personal finances effectively. The application aims to provide a user-friendly interface for users to input and categorize their expenses, set budgets, and visualize their financial data through interactive charts. By offering comprehensive financial insights, the budget tracker will empower users to make informed financial decisions and achieve their financial goals.
 
-Functionality & MVPs:
-In the budget tracker, users will be able to:
+## Live
+Visit the app: [Budget Tracker](https://eliltaa.github.io/budget-tracker_javascript_project/)
 
--Expense Tracking: Add, edit, and delete expenses with details like category and amount
+## Features
 
--Budget Management: Set budgets for different expense categories.
+- **Income Tracking**: Keep a record of your income sources, including date, source, and amount.
+        <img src="wireframes/incomes.png" height="200">
 
--Interactive Charts: Generate dynamic charts and graphs to visualize spending patterns and budget progress.
+- **Expense Tracking**: Record your expenses with details such as the date, category, and amount.
+        <img src="wireframes/expenses.png" height="200">
 
--Data Persistence: Utilize cookies to store user expenses, budgets, and settings for seamless data retrieval.
+- **Budget Planning**: Set your budget and visualize your spending relative to your budget.
+        <img src="wireframes/budgets.png" height="200">
 
-Technologies, Libraries, APIs:
-The budget tracker will use the following technologies and libraries:
+- **Interactive Charts**: Visualize your financial data with interactive and informative charts.
 
--Frontend: HTML, CSS, JavaScript, Chart.js for data visualization.
--Backend: No backend is used for this project as data will be stored in cookies.
+- **Data Persistence**: Your financial data is saved in cookies, so you won't lose your records when you revisit the site.
 
-Implementation Timeline:
-
--Friday Afternoon & Weekend: Plan and finalize project structure, including wireframes and basic HTML/CSS layout.
-Set up GitHub repository and initial project files. Implement the core HTML structure and CSS styles for the frontend.
-
--Monday: Develop the expense tracking functionality, allowing users to add, edit, and delete expenses.
-
--Tuesday: Add budget management features, including setting budgets for different expense categories.
-
--Wednesday: Finalize data visualization with interactive charts and graphs.Test the application for responsiveness and make necessary adjustments.
-
--Thursday Morning: Perform comprehensive testing and debugging. Polish the user interface and add any finishing touches.
-
-Wireframes:
-https://www.figma.com/proto/UCIlKgc3ECNvGolZtJMHBf/Untitled?type=design&node-id=1-2&t=tK1JfkUUE3dS3den-1&scaling=scale-down&page-id=0%3A1&mode=design
-
-![income](wireframes/income.png)
-![expense](wireframes/expense.png)
-![budget](wireframes/budget.png)
-![summary](wireframes/summary.png)
+Technologies, Libraries:
+- Frontend: HTML, CSS, JavaScript, Chart.js for data visualization.
+- Backend: No backend is used for this project as data will be stored in cookies.
