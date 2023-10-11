@@ -19,6 +19,10 @@ Visit the app: [Budget Tracker](https://eliltaa.github.io/budget-tracker_javascr
 
 - **Data Persistence**: Your financial data is saved in cookies, so you won't lose your records when you revisit the site.
 
+- **Sample Data**: When no user data is available in the app, sample data is provided. This allows users to explore the app's features and functionality even without adding their own data immediately. It serves as a helpful starting point for new users.
+
+    <img src="wireframes/code.png" height="500">
+
 Technologies, Libraries:
 - Frontend: HTML, CSS, JavaScript, Chart.js for data visualization.
 - Backend: No backend is used for this project as data will be stored in cookies.
